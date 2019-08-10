@@ -36,7 +36,7 @@ public class Flight{
 	//Use "ChronoUnit.HOURS.between(arrival, departure)()" to calculate,
 	//timegap between two instant i.e. arrival and departure
 	@Column(name="DURATION")
-	private Instant duration;
+	private long duration;
 	
 	@Column(name="ECONOMY_CLASS_COST")
 	private double economyClassCost;
@@ -109,11 +109,12 @@ public class Flight{
 		this.arrival = arrival;
 	}
 
-	public Instant getDuration() {
+
+	public long getDuration() {
 		return duration;
 	}
 
-	public void setDuration(Instant duration) {
+	public void setDuration(long duration) {
 		this.duration = duration;
 	}
 
