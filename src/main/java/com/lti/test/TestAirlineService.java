@@ -36,9 +36,9 @@ public class TestAirlineService {
 		Flight flight=new Flight();
 		flight.setSource("MUMBAI");
 		flight.setDestination("DELHI");
-		flight.setDeparture(LocalTime.of(18, 30));
-		flight.setArrival(LocalTime.of(20, 00));
-		flight.setDuration(ChronoUnit.MINUTES.between(flight.getDeparture(),flight.getArrival()));
+		//flight.setDeparture(LocalTime.of(18, 30));
+		//flight.setArrival(LocalTime.of(20, 00));
+		//flight.setDuration(ChronoUnit.MINUTES.between(flight.getDeparture(),flight.getArrival()));
 		flight.setEconomyClassCost(8500);
 		flight.setBusinessClassCost(19500);
 		flight.setNoOfSeats(20);

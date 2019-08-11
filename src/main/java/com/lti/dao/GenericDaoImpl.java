@@ -28,4 +28,9 @@ public class GenericDaoImpl implements GenericDao{
 		return entityManager.createQuery(q).getResultList();
 	}
 
+	public void delete(Object Obj) {
+		
+		entityManager.remove(Obj);
+	}
+
 }

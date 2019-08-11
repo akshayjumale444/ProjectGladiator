@@ -27,16 +27,16 @@ public class Flight{
 	private String destination;
 	
 	@Column(name="DEPARTURE")
-	private LocalTime departure;
+	private String departure;
 	
 	@Column(name="ARRIVAL")
-	private LocalTime arrival;
+	private String arrival;
 	
 	//To calculate duration=>create variable of class Instant i.e Instant duration
 	//Use "ChronoUnit.HOURS.between(arrival, departure)()" to calculate,
 	//timegap between two instant i.e. arrival and departure
 	@Column(name="DURATION")
-	private long duration;
+	private String duration;
 	
 	@Column(name="ECONOMY_CLASS_COST")
 	private double economyClassCost;
@@ -93,28 +93,28 @@ public class Flight{
 		this.destination = destination;
 	}
 
-	public LocalTime getDeparture() {
+	
+	public String getDeparture() {
 		return departure;
 	}
 
-	public void setDeparture(LocalTime departure) {
+	public void setDeparture(String departure) {
 		this.departure = departure;
 	}
 
-	public LocalTime getArrival() {
+	public String getArrival() {
 		return arrival;
 	}
 
-	public void setArrival(LocalTime arrival) {
+	public void setArrival(String arrival) {
 		this.arrival = arrival;
 	}
 
-
-	public long getDuration() {
+	public String getDuration() {
 		return duration;
 	}
 
-	public void setDuration(long duration) {
+	public void setDuration(String duration) {
 		this.duration = duration;
 	}
 
@@ -158,12 +158,12 @@ public class Flight{
 		this.businessSeats = businessSeats;
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return "Flight [flightId=" + flightId + ", source=" + source + ", destination=" + destination + ", departure="
 				+ departure + ", arrival=" + arrival + ", duration=" + duration + ", economyClassCost="
 				+ economyClassCost + ", businessClassCost=" + businessClassCost + ", noOfSeats=" + noOfSeats
 				+ ", economySeats=" + economySeats + ", businessSeats=" + businessSeats + ", admin=" + admin + "]";
-	}
+	}*/
 		
 }

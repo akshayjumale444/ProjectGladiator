@@ -9,6 +9,6 @@ public interface AdminService {
 	public int addFlight(Flight flight);
 	public List<Flight> displayFlight();
 	public Flight fetchFlightById(int flightId);
+	public int deleteFlight(int flightId);
 	
-
 }

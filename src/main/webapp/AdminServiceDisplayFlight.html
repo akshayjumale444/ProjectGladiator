@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="ISO-8859-1">
+<title>AdminServiceDisplayFlight</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$(function(){
+	$('#btn').click(function(){
+		var url="displayAllFlight.lti";
+		
+		$.ajax({
+			url:url,
+			method:'POST',
+			dataType:'json',
+			success:function(response){
+				//$("#div1").append($("<h4/>").text(response.message))
+				alert(JSON.stringify(response));
+			}
+		})
+	})
+})
+</script>
+
+</head>
+<body>
+	<h1>Display Flight</h1>
+	<button type="submit" id="btn">Display All Flight</button>
+</body>
+</html>

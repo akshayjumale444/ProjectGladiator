@@ -18,9 +18,10 @@
 	<!-- Loading annotated beans -->
 	<context:component-scan
 		base-package="com.lti.controller, 
-									com.lti.dao, 
-									com.lti.service,
-									com.lti.test" />
+						com.lti.dao, 
+						com.lti.service,
+						com.lti.test,
+						com.lti.function" />
 
 
 	<!-- Each bean must have a unique name -->
