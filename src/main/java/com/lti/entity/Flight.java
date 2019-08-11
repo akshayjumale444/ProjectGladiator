@@ -157,10 +157,13 @@ public class Flight{
 	public void setBusinessSeats(int businessSeats) {
 		this.businessSeats = businessSeats;
 	}
-	
-	
-	
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "Flight [flightId=" + flightId + ", source=" + source + ", destination=" + destination + ", departure="
+				+ departure + ", arrival=" + arrival + ", duration=" + duration + ", economyClassCost="
+				+ economyClassCost + ", businessClassCost=" + businessClassCost + ", noOfSeats=" + noOfSeats
+				+ ", economySeats=" + economySeats + ", businessSeats=" + businessSeats + ", admin=" + admin + "]";
+	}
+		
 }

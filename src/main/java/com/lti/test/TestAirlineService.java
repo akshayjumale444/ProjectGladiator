@@ -34,13 +34,13 @@ public class TestAirlineService {
 	public void testSave(){
 		
 		Flight flight=new Flight();
-		flight.setSource("AHMADABAD");
-		flight.setDestination("KOLKATA");
-		flight.setDeparture(LocalTime.of(10, 30));
-		flight.setArrival(LocalTime.of(13, 00));
+		flight.setSource("MUMBAI");
+		flight.setDestination("DELHI");
+		flight.setDeparture(LocalTime.of(18, 30));
+		flight.setArrival(LocalTime.of(20, 00));
 		flight.setDuration(ChronoUnit.MINUTES.between(flight.getDeparture(),flight.getArrival()));
-		flight.setEconomyClassCost(6700);
-		flight.setBusinessClassCost(16500);
+		flight.setEconomyClassCost(8500);
+		flight.setBusinessClassCost(19500);
 		flight.setNoOfSeats(20);
 		flight.setEconomySeats(10);
 		flight.setBusinessSeats(10);

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="ISO-8859-1">
+<title>AdminService</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+	$(function(){
+		$("#adminServiceFrm").submit(function(evt){
+			evt.preventDefault();
+			var obj={
+					source : $("#source").val(),
+					destination : $("#destination").val(),
+					departure : $("#departure").val(),
+					arrival : $("#arrival").val(),
+					duration : $("#duration").val(),
+					economyClassCost : $("#economyClassCost").val(),
+					businessClassCost : $("#businessClassCost").val(),
+					noOfSeats : $("#noOfSeats").val(),
+					economySeats : $("#economySeats").val(),
+					businessSeats : $("#businessSeats").val(),
+					adminId : $("#adminId").val()
+			}
+			$.ajax({
+				url : 'addFlight.lti',
+				method : 'POST',
+				data : JSON.stringify(obj),
+				contentType : 'application/json',
+				success : function(response){
+					alert(JSON.stringify(response));
+				}
+			})
+		})
+	})
+</script>
+</head>
+<body>
+<h1>Add Flight</h1>
+	<form id="adminServiceFrm">
+		source :<input type="text" id="source"/></br>
+		destination :<input type="text" id="destination"/></br>
+		departure :<input type="text" id="departure"/></br>
+		arrival :<input type="text" id="arrival"/></br>
+		duration :<input type="text" id="duration"/></br>
+		economyClassCost :<input type="number" id="economyClassCost"/></br>
+		businessClassCost :<input type="number" id="businessClassCost"/></br>
+		noOfSeats :<input type="number" id="noOfSeats"/></br>
+		economySeats :<input type="number" id="economySeats"/></br>
+		businessSeats <input type="number" id="businessSeats"/></br>
+		adminId :<input type="number" id="adminId"/></br>
+		<button type="submit" >AddFlight</button>
+	</form>
+</body>
+</html>

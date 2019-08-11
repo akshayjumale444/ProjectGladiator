@@ -9,4 +9,26 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <!-- This step is required for setting up support for Spring in a web application. 
+		Spring framework provides a Servlet by the name DispatcherServlet which is 
+		the backbone of Spring MVC DispatcherServlet plays the role of Front Controller 
+		by this Servlet in our application. Any request from the client will be handled 
+		by this Servlet from now onwards. Also this Servlet will automatically load 
+		the IoC container/ApplicationContext for us, so we don't need to write this 
+		code anymore: ApplicationContext context= new ClassPathXmlApplicationContext("spring-config.xml"); -->
+	<servlet>
+		<servlet-name>app</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring-config.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>app</servlet-name>
+		<url-pattern>*.lti</url-pattern>
+	</servlet-mapping>
 </web-app>
