@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+	$(function(){
+		$("#departFrm").submit(function(evt){
+			evt.preventDefault(); 
+			var obj={
+					depart : $("#depart").val()
+			}
+			$.ajax({
+				url : "getTime.lti", 
+				method : 'POST' ,
+				data : JSON.stringify(obj), 
+				contentType : 'application/json', 
+				success : function(response){
+					alert(JSON.stringify(response));
+				}
+			})
+		})
+	})
+</script>
+</head>
+<body>
+<form id="departFrm">
+	Depart<input type="datetime-local" id=depart><br>
+	<button type="submit" id="btn">Submit</button>
+</form>
+	
+</body>
+</html>

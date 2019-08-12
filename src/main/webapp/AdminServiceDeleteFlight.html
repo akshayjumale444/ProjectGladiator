@@ -3,33 +3,38 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>AdminServiceDeleteFlight</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-	$(function(){
-		$("#deleteFlightFrm").submit(function(evt){
-			evt.preventDefault(); 
-			var obj={
-					flightId : $("#flightId").val()
-			}
-			$.ajax({
-				url : 'deleteFlight.lti',
-				method : 'POST',
-				data : JSON.stringify(obj),
-				contentType : 'application/json',
-				success : function(response){
-					alert(JSON.stringify(response));
-				}
-			})
-		})
+	$(function() {
+		$("#deleteFlightFrm").submit(
+				function(evt) {
+					evt.preventDefault();
+					var obj = {
+						flightId : $("#flightId").val()
+					}
+					$.ajax({
+						url : 'deleteFlight.lti',
+						method : 'POST',
+						data : JSON.stringify(obj),
+						contentType : 'application/json',
+						success : function(response) {
+							alert(JSON.stringify(response));
+							$("#divDeleteId").append(
+									"<h4>" + response.message + "</h4>");
+						}
+					})
+				})
 	})
 </script>
 </head>
 <body>
 	<h1>Delete Flight</h1>
 	<form id="deleteFlightFrm">
-		Enter Flight Id <input type="number" id="flightId"/><br>
+		Enter Flight Id <input type="number" id="flightId" /><br>
 		<button type="submit" id="btn">DeleteFlight</button>
 	</form>
+	<div id="divDeleteId"></div>
 
 </body>
 </html>
