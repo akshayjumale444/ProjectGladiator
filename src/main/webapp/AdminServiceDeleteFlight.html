@@ -13,7 +13,7 @@
 			}
 			$.ajax({
 				url : 'deleteFlight.lti',
-				method : 'GET',
+				method : 'POST',
 				data : JSON.stringify(obj),
 				contentType : 'application/json',
 				success : function(response){
@@ -27,7 +27,7 @@
 <body>
 	<h1>Delete Flight</h1>
 	<form id="deleteFlightFrm">
-		Enter Flight Id <input type="text" id="flightId"/><br>
+		Enter Flight Id <input type="number" id="flightId"/><br>
 		<button type="submit" id="btn">DeleteFlight</button>
 	</form>
 

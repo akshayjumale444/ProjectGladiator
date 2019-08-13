@@ -15,8 +15,59 @@ $(function(){
 			method:'POST',
 			dataType:'json',
 			success:function(response){
-				//$("#div1").append($("<h4/>").text(response.message))
+				//$("#div1").append($("<h4/>").text(response))
 				alert(JSON.stringify(response));
+				
+				//displaying all the flight
+				$("#divTable").append("<Table border=05 id='tb'><tr>"
+				+"<th>Flight Id</th>"		
+				+"<th>Source</th>"
+				+"<th>Destination</th>"
+				+"<th>Departure</th>"
+				+"<th>Arrival</th>"
+				+"<th>Duration</th>"
+				+"<th>No Of Seats</th>"
+				+"<th>EconomySeats</th>"
+				+"<th>BusinessSeats</th>"
+				+"<th>EconomyCost</th>"
+				+"<th>BusinessCost</th>"
+				+"<th>AdminId</th>"
+				+"</tr>");
+				
+				/* $.each(response,function(index,flights){
+					$("#div1").append("<div id='retrievedFlightDiv'><br> Flight Id: "+flights.flightId
+							+"<br> Source: "+flights.source
+							+"<br> Destination: "+flights.destination
+							+"<br> Departure :"+flights.departure
+							+"<br> Arrival :"+flights.arrival
+							+"<br> Duration :"+flights.duration
+							+"<br> No Of Seats :"+flights.noOfSeats
+							+"<br> EconomySeats :"+flights.economySeats
+							+"<br> BusinessSeats :"+flights.businessSeats
+							+"<br> EconomyCost :"+flights.economyClassCost
+							+"<br> BusinessCost :"+flights.businessClassCost
+							+"</div><hr>");
+							
+					//$("#divTable").append("<tr><td>"+flights.flightId+"</td><td>"
+					//		+flights.source+"</td></tr>");
+				})*/
+				
+				$.each(response,function(index,flights){
+					$("#tb").append("<tr><td>"+flights.flightId+"</td><td>"
+							+flights.source+"</td><td>"
+							+flights.destination+"</td><td>"
+							+flights.departure+"</td><td>"
+							+flights.arrival+"</td><td>"
+							+flights.duration+"</td><td>"
+							+flights.noOfSeats+"</td><td>"
+							+flights.economySeats+"</td><td>"
+							+flights.businessSeats+"</td><td>"
+							+flights.economyClassCost+"</td><td>"
+							+flights.businessClassCost+"</td><td>"
+							+JSON.stringify(flights.admin.adminId)+"</td><td>"
+							+"</tr>");
+				})
+				$("#divTable").append("</Table>");
 			}
 		})
 	})
@@ -27,5 +78,7 @@ $(function(){
 <body>
 	<h1>Display Flight</h1>
 	<button type="submit" id="btn">Display All Flight</button>
+	<div id="divTable"></div>
+	<div id="div1"></div>
 </body>
 </html>
