@@ -12,6 +12,7 @@
 			var obj={
 					depart : $("#depart").val()
 			}
+			alert( JSON.stringify(obj));
 			$.ajax({
 				url : "getTime.lti", 
 				method : 'POST' ,
@@ -27,7 +28,7 @@
 </head>
 <body>
 <form id="departFrm">
-	Depart<input type="datetime-local" id=depart><br>
+	Depart<input type="time" id=depart><br>
 	<button type="submit" id="btn">Submit</button>
 </form>
 	

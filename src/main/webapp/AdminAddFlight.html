@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Musafir Airline</title>
+<link rel="stylesheet" type="text/css" href="Airline.css"></link>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+	$(function(){
+		$("#adminServiceFrm").submit(function(evt){
+			evt.preventDefault();
+			var obj={
+					source : $("#source").val(),
+					destination : $("#destination").val(),
+					departure : $("#departure").val(),
+					arrival : $("#arrival").val(),
+					<!-- duration : $("#duration").val(),-->
+					noOfSeats : $("#noOfSeats").val(),
+					economySeats : $("#economySeats").val(),
+					businessSeats : $("#businessSeats").val(),
+					economyClassCost : $("#economyClassCost").val(),
+					businessClassCost : $("#businessClassCost").val(),
+					adminId : $("#adminId").val()
+			}
+			$.ajax({
+				url : 'addFlight.lti',
+				method : 'POST',
+				data : JSON.stringify(obj),
+				contentType : 'application/json',
+				success : function(response){
+					//alert(JSON.stringify(response));
+					$("#divAddFlight").append("<h4>"+response.message+"</h4>"
+					+"<h4>Generated Flight Id is "+response.generatedId+"</h4>");
+				}
+			})
+		})
+	})
+</script>
+</head>
+<body>
+	<div class="main">
+		<div class="logo">
+			<img src="Logo.png">
+			<ul>
+				<li><a href="AdminPortal.html">Home</a></li>
+			</ul>
+		</div>
+	</div>
+	<header>
+		<div class="addFlight">
+
+			<form id="adminServiceFrm">
+
+				<h1>
+					<center>INSERT FLIGHT</center>
+				</h1>
+				<br>
+				<!-- <label>Flight ID:</label> <input type="number" name="Flightid" id="Flightid" required><br><br> -->
+				<label>Source:</label> <input type="text" name="Source" id="source"
+					required> <label>Destination:</label> <input type="text"
+					name="Destination" id="destination" required><br> <br>
+				<label>Departure:</label> <input type="text" name="Departure"
+					id="departure" required> <label>Arrival:</label> <input
+					type="text" name="Arrival" id="arrival" required><br>
+				<br>
+				<!--<label>Duration</label><br> <input type="number" name="Duration" id="Dusration
+			    	"><br><br>-->
+				<label>Economy Class Cost:</label> <input type="number"
+					name="EconomyCost" id="economyClassCost" required> <label>Business
+					Class Cost:</label> <input type="number" name="BusinessCost"
+					id="businessClassCost" required><br> <br> <label>No.
+					of Seats:</label> <input type="number" name="Seats" id="noOfSeats" required><br>
+				<br> <label>Economy Class Seats:</label> <input type="number"
+					name="EconomySeats" id="economySeats" required> <label>Business
+					Class Seats:</label> <input type="number" name="BusinessSeats"
+					id="businessSeats" required><br> <br> <label>Admin
+					Id:</label> <input type="number" name="BusinessSeats" id="adminId" required><br>
+				<br>
+				<center>
+					<input type="submit" value="Add Flight" id="sub">
+				</center>
+			</form>
+			<div id="divAddFlight"></div>
+
+		</div>
+	</header>
+</body>
+</html>

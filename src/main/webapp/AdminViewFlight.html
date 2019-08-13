@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="ISO-8859-1">
+<title>AdminServiceDisplayFlight</title>
+<link rel="stylesheet" type="text/css" href="Airline.css"></link>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+	$(function() {
+		var url = "displayAllFlight.lti";
+
+		$.ajax({
+			url : url,
+			method : 'POST',
+			dataType : 'json',
+			success : function(response) {
+				//alert(JSON.stringify(response));
+
+				//displaying all the flight
+				$("#divTable").append(
+						"<table border=05 id='flightTable'><tr>"
+								+ "<th>Flight Id</th>" + "<th>Source</th>"
+								+ "<th>Destination</th>" + "<th>Departure</th>"
+								+ "<th>Arrival</th>" + "<th>Duration</th>"
+								+ "<th>No Of Seats</th>"
+								+ "<th>EconomySeats</th>"
+								+ "<th>BusinessSeats</th>"
+								+ "<th>EconomyClassCost(INR)</th>"
+								+ "<th>BusinessClassCost(INR)</th>"
+								+ "<th>AdminId</th>" + "</tr>");
+
+				$.each(response, function(index, flights) {
+					$("#flightTable").append(
+							"<tr><td>" + flights.flightId + "</td><td>"
+									+ flights.source + "</td><td>"
+									+ flights.destination + "</td><td>"
+									+ flights.departure + "</td><td>"
+									+ flights.arrival + "</td><td>"
+									+ flights.duration + "</td><td>"
+									+ flights.noOfSeats + "</td><td>"
+									+ flights.economySeats + "</td><td>"
+									+ flights.businessSeats + "</td><td>"
+									+ flights.economyClassCost + "</td><td>"
+									+ flights.businessClassCost + "</td><td>"
+									+ JSON.stringify(flights.admin.adminId)
+									+ "</td><td>" + "</tr>");
+				})
+				$("#divTable").append("</table>");
+			}
+		})
+	})
+</script>
+
+</head>
+<body>
+	<div class="main">
+		<div class="logo">
+			<img src="Logo.png">
+			<ul>
+				<li><a href="AdminPortal.html">Home</a></li>
+			</ul>
+		</div>
+	</div>
+	<br>
+	<h1>Flights</h1>
+	<div id="divTable"></div>
+</body>
+</html>

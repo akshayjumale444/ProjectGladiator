@@ -1,0 +1,184 @@
+*{
+  margin: 0;
+  padding: 0;
+  font-family: Century Gothic;
+}
+
+.main{
+width:100%;
+margin: auto;
+background-color: #ef2e1f;
+overflow: hidden;
+}
+
+.logo img{
+  float: left;
+  width: 250px;
+  height: auto;
+  margin-left: 10px;
+  margin-top: 5px;
+  padding-bottom: 5px;
+}
+
+ul{
+float: right;
+list-style-type:none; 
+margin-top: 25px;
+margin-right: 46px;
+}
+
+ul li{
+display: inline-block;
+}
+
+ul li a{
+text-decoration: none;
+color: #fff;
+padding: 5px 20px;
+border:1px solid #000;
+transition: 0.6s ease;
+border-radius: 10px;
+}
+
+ul li a:hover{
+background-color: #fff;
+color: #000;
+}
+
+ul li a:active{
+text-decoration: none;
+color: #fff;
+}
+
+h1 {
+
+  padding-bottom:50px;
+   color: black;
+   font-family: Arial, Helvetica, sans-serif;
+  font-size: 40px;
+
+}
+
+header{
+  background-color: #fff;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  padding-top: 50px;
+}
+
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
+  transition: 0.3s;
+  width: 20%;
+  color: #000;
+  background-color: #fff;
+  border-radius: 25px;
+
+}
+
+.card:hover {
+  box-shadow: 0 16px 20px 0 rgba(0,0,0,1
+    );
+}
+
+.card:activated{
+  color: none; 
+}
+
+.card:visited {
+  color: none;
+}
+
+.container {
+
+  padding: 2px 16px;
+}
+
+
+.card {
+  padding: 2px 16px;
+  float: left;
+  display: flex;
+  justify-content: space-between; 
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 100px;
+  margin-left: 100px;
+
+
+}
+
+img {
+  border-radius: 5px 5px 0 0;
+}
+
+.addFlight{
+background: #ffb3b3;
+width: 700px;
+color: black;
+font-size: 15px;
+padding: 10px;
+border-radius: 10px;
+margin-left:300px;
+margin-right:75px;
+margin-bottom:75px;
+float: none;
+display: inline-block;
+}
+.delFlight{
+background: #ffb3b3;
+width: 500px;
+color: black;
+font-size: 15px;
+padding: 10px;
+border-radius: 10px;
+margin-left:400px;
+margin-right:75px;
+ 
+margin-bottom:75px;
+  
+}
+
+label{
+font-size: 18px;
+font-style: italic;
+}
+
+<!-- CSS for View Table-->
+
+h1{
+  font-size: 30px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+#flightTable {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#flightTable td, #flightTable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#flightTable tr:nth-child(even){background-color: #f2f2f2;}
+
+#flightTable tr:hover {background-color: #ddd;}
+
+#flightTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color:  #ef2e1f;
+  color: white;
+}
+}
+
+
