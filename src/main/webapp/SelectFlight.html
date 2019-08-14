@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+<style>
+	.oneWayResultFlightsDiv{
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+		width: 90%;
+		margin-right: 30px;
+  		margin-left: 30px;
+  		padding-top: 10px;
+  		padding-right: 30px;
+  		padding-bottom: 10px;
+  		padding-left: 30px;
+		
+	}
+	
+	.twoWayResultFlightsDiv{
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+		width: 40%;
+		margin-right: 30px;
+  		margin-left: 30px;
+  		padding-top: 10px;
+  		padding-right: 30px;
+  		padding-bottom: 10px;
+  		padding-left: 30px;
+	}
+	
+	.twoWayDepartureDiv{
+		width: 50%;
+		margin-right: 30px;
+  		margin-left: 30px;
+  		float: left;
+	}
+	
+	.twoWayReturnDiv{
+		width: 50%;
+		margin-right: 30px;
+  		margin-left: 30px;
+  		float: right;
+	}
+	
+</style>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+	$(function() {
+		//SessionStorage
+		if (typeof (Storage) !== "undefined") {
+			// Store
+			alert(sessionStorage.getItem("tripType"));
+			if(sessionStorage.getItem("tripType")=="oneway")
+				{
+					alert(sessionStorage.getItem("oneWayTripFlights"));
+					//var stringResponse = sessionStorage.getItem("oneWayTripFlights");
+					var response = JSON.parse(sessionStorage.getItem("oneWayTripFlights"));
+					alert(response);
+					//$.ajax({
+						response.forEach(function (flights) {
+						//$.each(response, function(index, flights){
+							
+							console.log(flights);
+							var btn = $("<button/>")
+							.attr("type","submit")
+							.attr("id","selectFromResultBtn")
+							.attr("value",flights.flightId)
+							.text("Book");
+							
+							$("#searchResults").append("<div class='oneWayResultFlightsDiv'> Flight Id.: "+flights.flightId
+									+"<br> Source: "+flights.source
+									+" Departure Time: "+flights.departure
+									+"<br> Destination: "+flights.destination
+									+" Arrival Time: "+flights.arrival
+									+"<br>Duration: "+flights.duration
+									+"<br>Economy Class Cost: "+flights.economyClassCost
+									+" Business Class Cost: "+flights.businessClassCost
+									+"<br>"+btn+"</div> <br>");
+							
+							
+									
+							
+									//$("#searchResults").append(btn+"</div> <br>");
+						});
+						
+						$("#selectFromResultBtn").click(function(){
+							var oneWaySelectedId = $("#selectFromResultBtn").val();
+						    alert("Selected Flight Id.: "+oneWaySelectedId);
+						  });
+						//});
+				}
+			else{
+				alert(sessionStorage.getItem("returnTripDepartureFlights"));
+				alert(sessionStorage.getItem("returnTripReturnFlights"));
+				
+				var departureResponse = JSON.parse(sessionStorage.getItem("returnTripDepartureFlights"));
+				alert(departureResponse);
+
+				var returnResponse = JSON.parse(sessionStorage.getItem("returnTripReturnFlights"));
+								alert(departureResponse);
+								
+								// Departure Flights
+								$("#searchResults").append("<div id='twoWayDepartureDiv' class='twoWayDepartureDiv'>");
+								departureResponse.forEach(function (flights) {
+									console.log(flights);
+									$("#twoWayDepartureDiv").append("<div class='twoWayResultFlightsDiv'> Flight Id.: "+flights.flightId
+											+"<br> Source: "+flights.source
+											+" Departure Time: "+flights.departure
+											+"<br> Destination: "+flights.destination
+											+" Arrival Time: "+flights.arrival
+											+"<br>Duration: "+flights.duration
+											+"<br>Economy Class Cost: "+flights.economyClassCost
+											+" Business Class Cost: "+flights.businessClassCost
+											+"</div> <br>");
+								});
+								$("#searchResults").append("</div>");
+								
+
+								// Return Flights
+								$("#searchResults").append("<div id='twoWayReturnDiv' class='twoWayReturnDiv'>");
+								returnResponse.forEach(function (flights) {
+									console.log(flights);
+									$("#twoWayReturnDiv").append("<div class='twoWayResultFlightsDiv'> Flight Id.: "+flights.flightId
+											+"<br> Source: "+flights.source
+											+" Departure Time: "+flights.departure
+											+"<br> Destination: "+flights.destination
+											+" Arrival Time: "+flights.arrival
+											+"<br>Duration: "+flights.duration
+											+"<br>Economy Class Cost: "+flights.economyClassCost
+											+" Business Class Cost: "+flights.businessClassCost
+											+"</div> <br>");
+								});
+								$("#searchResults").append("</div>");
+								
+			}	
+		} else {
+			alert("Sorry, your browser does not support Web Storage...");
+		}
+	})
+
+</script>
+</head>
+<body>
+	<h1>Selected Flights</h1>
+	<hr><br>
+	<div id="searchResults"></div>
+</body>
+</html>

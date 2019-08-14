@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Search Flight</title>
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+	$(function() {
+		$("#searchFlightForm")
+				.submit(
+						function(evt) {
+							evt.preventDefault();
+							
+							var searchSource = $("#source").val();
+							var searchDestination = $("#destination").val();
+							var searchClass = $("#tavelClass").val();
+							var searchTravelers = $("#noOFTravelers").val();
+							var searchJourney = $("input[name='travelJourney']:checked").val();
+							
+							
+							if (searchJourney == "oneway") {
+								//One Way Trip
+								
+								$.ajax({
+									
+									url : 'searchFlights.lti?source='
+											+ searchSource + '&destination='
+											+ searchDestination
+											+ '&travelClass=' + searchClass
+											+ '&noOFTravelers='
+											+ searchTravelers,
+									method : 'GET',
+									//contentType: 'application/json',
+									success : function(response) {	
+										alert(JSON.stringify(response));
+										
+										// SessionStorage
+										if (typeof(Storage) !== "undefined") {
+ 											// Store
+ 											sessionStorage.setItem("tripType","oneway");
+  											sessionStorage.setItem("oneWayTripFlights",JSON.stringify(response));
+  
+										} else {
+  											alert("Sorry, your browser does not support Web Storage...");
+										}
+										//session end 
+										window.location.href="SelectFlight.html";
+									}
+								
+								})
+							
+							}
+							else {
+								// Round Trip
+								// Source To Destination
+								$.ajax({
+									url : 'searchFlights.lti?source='
+										+ searchSource + '&destination='
+										+ searchDestination
+										+ '&travelClass=' + searchClass
+										+ '&noOFTravelers='
+										+ searchTravelers,
+								method : 'GET',
+								//contentType: 'application/json',
+								success : function(response) {
+									//alert(JSON.stringify(response));
+									
+									//console.log(JSON.stringify(response));
+									// SessionStorage
+									if (typeof(Storage) !== "undefined") {
+											// Store
+											sessionStorage.setItem("tripType","twoway");
+											sessionStorage.setItem("returnTripDepartureFlights",JSON.stringify(response));
+
+									} else {
+											alert("Sorry, your browser does not support Web Storage...");
+									}
+									//session end
+								
+									alert(sessionStorage.getItem("returnTripDepartureFlights"));
+									console.log(sessionStorage.getItem("returnTripDepartureFlights"));
+								}
+								});
+								
+								
+								// Destination To Source
+								$.ajax({
+									url : 'searchFlights.lti?source='
+										+ searchDestination + '&destination='
+										+ searchSource
+										+ '&travelClass=' + searchClass
+										+ '&noOFTravelers='
+										+ searchTravelers,
+								method : 'GET',
+								//contentType: 'application/json',
+								success : function(response) {
+									//alert(JSON.stringify(response));
+									
+									//console.log(JSON.stringify(response));
+									
+									
+									// SessionStorage
+									if (typeof(Storage) !== "undefined") {
+											// Store
+											sessionStorage.setItem("tripType","twoway");
+											sessionStorage.setItem("returnTripReturnFlights",JSON.stringify(response));
+
+									} else {
+											alert("Sorry, your browser does not support Web Storage...");
+									}
+									//session end 
+									alert(sessionStorage.getItem("returnTripReturnFlights"));
+									console.log(sessionStorage.getItem("returnTripReturnFlights"));
+								}
+								});
+								
+								window.location.href="SelectFlight.html";
+							}
+						})
+						
+	})
+</script>
+
+</head>
+<body>
+	<form id="searchFlightForm">
+	
+		Journey: <br> 
+			<input type="radio" id="travelJourney" name="travelJourney" value="oneway">One Way 
+			<input type="radio" id="travelJourney" name="travelJourney" value="twoway">Two Way 
+			<br><br>
+			
+			From: <Select id="source">
+				<option value="MUMBAI">Mumbai</option>
+				<option value="DELHI">Delhi</option>
+				<option value="PUNE">Pune</option>
+		</Select> <br> <br> To: <Select id="destination">
+			<option value="MUMBAI">Mumbai</option>
+			<option value="DELHI">Delhi</option>
+			<option value="JAIPUR">Jaipur</option>
+		</Select> <br> <br> Departure: <input type="date" id="departure">
+		<br> <br> Travelers: <input type="number" id="noOFTravelers">
+		<br> <br> Travel Class: <Select id="tavelClass">
+			<option value="economy">Economy</option>
+			<option value="business">Business</option>
+		</Select> <br> <br>
+		<button type="submit">Search</button>
+		<br><br><hr><br><br>
+		
+	</form>
+	<div id="searchResults"></div>
+</body>
+</html>
