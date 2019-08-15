@@ -1,93 +1,100 @@
-.regwindow{
-border-style: solid;
-border-width: 1px;
-border-color: #D3D3D3;
-border-radius: 5px;
-width: 300px;
-padding: 20px 20px 20px 20px;
-margin-top:1%;
-margin-left: auto;
-margin-right: auto;
-display: block;
-background: #BEBEBE
+.regwindow {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #D3D3D3;
+	border-radius: 5px;
+	width: 300px;
+	padding: 20px 20px 20px 20px;
+	margin-top: 1%;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	background: #BEBEBE
 }
 
-.regtitle{
-font-weight: 200;
-font-size: 30px;
-font-family: Arial;
+.regtitle {
+	font-weight: 200;
+	font-size: 30px;
+	font-family: Arial;
 }
 
-.regwindow input[type=text], [type=email], [type=number], [type=Date]{
-width: 100%;
-height: 30px;
-padding: 3px 3px;
-margin: 3px 0px 13px 0px;
-display: inline-block;
-border: 1px solid #ccc;
-border-radius: 4px;
-box-sizing: border-box;
+.regwindow input[type=text], [type=email], [type=number], [type=Date] {
+	width: 100%;
+	height: 30px;
+	padding: 3px 3px;
+	margin: 3px 0px 13px 0px;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
 }
 
-.regwindow input[type=password]{
-    width: 100%;
-height: 30px;
-padding: 3px 3px;
-margin: 3px 0px 13px 0px;
-display: inline-block;
-border: 1px solid #ccc;
-border-radius: 4px;
-box-sizing: border-box;
-background: #fff;
+.regwindow input[type=password] {
+	width: 100%;
+	height: 30px;
+	padding: 3px 3px;
+	margin: 3px 0px 13px 0px;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	background: #fff;
 }
 
-.regwindow input[type=submit]{
-width: 100%;
-height: 30px;
-padding: 3px 3px;
-margin: 3px 0px 13px 0px;
-display: inline-block;
-border: 1px solid #ccc;
-border-radius: 4px;
-box-sizing: border-box;
-background: #ef2e1f;
-color: #fff;
+.regwindow input[type=submit] {
+	width: 100%;
+	height: 30px;
+	padding: 3px 3px;
+	margin: 3px 0px 13px 0px;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	background: #ef2e1f;
+	color: #fff;
 }
 
-.regwindow label{
-font-weight: 600;
-font-size: 13px;
-font-family: Arial;
+.regwindow label {
+	font-weight: 600;
+	font-size: 13px;
+	font-family: Arial;
 }
 
-.regwindow p.pswcap{
-font-size: 12px;
-font-family: Arial;
-}
-.regwindow p.info{
-font-size: 13px;
-font-family: Arial;
+.regwindow p.pswcap {
+	font-size: 12px;
+	font-family: Arial;
 }
 
-#ucontact{
-width: 78%;
+.regwindow p.info {
+	font-size: 13px;
+	font-family: Arial;
 }
 
-#options{
-width: 20%;
-height: 30px;
-border-radius: 5px;
+#ucontact {
+	width: 78%;
+}
+
+#options {
+	width: 20%;
+	height: 30px;
+	border-radius: 5px;
 }
 
 label.error {
-    color: red;
-    font-size: 1rem;
-    display: block;
-    margin-top: 5px;
+	color: red;
+	font-size: 5rem;
+	display: block;
+	margin-top: 5px;
 }
 
 input.error {
-    border: 1px dashed red;
-    font-weight: 300;
-    color: red;
+	border: 1px dashed red;
+	font-weight: 300;
+	color: red;
+}
+
+.error_form {
+	font-size: 15px;
+	font-family: Arial;
+	color: #FF0052;
 }

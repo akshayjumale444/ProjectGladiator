@@ -15,7 +15,6 @@
 					destination : $("#destination").val(),
 					departure : $("#departure").val(),
 					arrival : $("#arrival").val(),
-					<!-- duration : $("#duration").val(),-->
 					noOfSeats : $("#noOfSeats").val(),
 					economySeats : $("#economySeats").val(),
 					businessSeats : $("#businessSeats").val(),
@@ -32,6 +31,19 @@
 					//alert(JSON.stringify(response));
 					$("#divAddFlight").append("<h4>"+response.message+"</h4>"
 					+"<h4>Generated Flight Id is "+response.generatedId+"</h4>");
+					
+					//Clearing the fields in the form after successful addition of flight
+					$("source").val("");
+					$("#destination").val("");
+					$("#departure").val("");
+					$("#arrival").val("");
+					$("#noOfSeats").val("");
+					$("#economySeats").val("");
+					$("#businessSeats").val("");
+					$("#economyClassCost").val("");
+					$("#businessClassCost").val("");
+					$("#adminId").val("");
+					
 				}
 			})
 		})

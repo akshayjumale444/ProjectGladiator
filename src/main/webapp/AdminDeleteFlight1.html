@@ -23,6 +23,9 @@
 							//alert(JSON.stringify(response));
 							$("#divDeleteId").append(
 									"<h4>" + response.message + "</h4>");
+							
+							//Clearing the form field after the operation
+							$("#flightId").val("");
 						}
 					})
 				})

@@ -23,7 +23,6 @@ public class TestAirlineService {
 		user.setEmailId("sk@gmail.com");
 		user.setMobno(9874563210L);
 		user.setPassword("sk123");
-		user.setDateOfBirth(LocalDate.of(1997, 10, 30));
 		
 		int userId=dao.addUser(user);
 		System.out.println("UserId:"+userId);
