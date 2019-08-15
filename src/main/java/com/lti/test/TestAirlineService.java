@@ -18,14 +18,15 @@ public class TestAirlineService {
 	public void testAddUser() {
 		User user=new User();
 		
-		user.setFname("Akshay");
-		user.setLname("Jumale");
-		user.setEmailId("aks@gmail.com");
-		user.setMobno(9689036807L);
-		user.setPassword("abc123");
-		user.setDateOfBirth(LocalDate.of(1997, 10, 12));
+		user.setFname("Shubham");
+		user.setLname("Kulkarni");
+		user.setEmailId("sk@gmail.com");
+		user.setMobno(9874563210L);
+		user.setPassword("sk123");
+		user.setDateOfBirth(LocalDate.of(1997, 10, 30));
 		
-		dao.addUser(user);
+		int userId=dao.addUser(user);
+		System.out.println("UserId:"+userId);
 		
 	}
 }

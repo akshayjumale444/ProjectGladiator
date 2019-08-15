@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Review Selection</title>
+<style>
+	.selectedFlightDetails{
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+		width: 90%;
+		margin-right: 30px;
+  		margin-left: 30px;
+  		padding-top: 10px;
+  		padding-right: 30px;
+  		padding-bottom: 10px;
+  		padding-left: 30px;
+		
+	}
+	.estimatedBill{
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+		width: 90%;
+		margin-right: 30px;
+  		margin-left: 30px;
+  		padding-top: 10px;
+  		padding-right: 30px;
+  		padding-bottom: 10px;
+  		padding-left: 30px;
+	}
+	
+</style>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+$(function(){
+	//alert(sessionStorage.getItem("oneWaySelectedFlightId"));
+	
+	if(sessionStorage.getItem("tripType")=="oneway"){
+		$("#selectedFlightDetails").append(sessionStorage.getItem("oneWaySelectedFlightId"));
+		alert(sessionStorage.getItem("oneWaySelectedFlightId"));
+		
+		var response = JSON.parse(sessionStorage.getItem("oneWayTripFlights"));
+		var oneWaySelectedFlightId = sessionStorage.getItem("oneWaySelectedFlightId");
+		var travelClass = sessionStorage.getItem("TravelClass");
+		var noOfTravelers = sessionStorage.getItem("NoOfTravellers");
+		response.forEach(function (flights) {
+			if(flights.flightId == oneWaySelectedFlightId){
+				console.log(flights);
+				
+				$("#selectedFlightDetails").append("<div id ='oneWayResultFlightsDiv' class='oneWayResultFlightsDiv'> Flight Id.: "+flights.flightId
+						+"<br> Source: "+flights.source
+						+" Departure Time: "+flights.departure
+						+"<br> Destination: "+flights.destination
+						+" Arrival Time: "+flights.arrival
+						+"<br>Duration: "+flights.duration);
+						
+				if(travelClass == "economy"){
+					$("#selectedFlightDetails").append("<br>Economy Class Cost: Rs. "+flights.economyClassCost
+							+"<br><br>");
+					$("#estimatedBill").append("Travel Class: ECONOMY <br>Base Fare (Adults): Rs. "+flights.economyClassCost+" * "+noOfTravelers+"<br><br> Total Fare: Rs. "+(flights.economyClassCost*noOfTravelers));
+				}
+				else{
+					$("#selectedFlightDetails").append("<br>Business Class Cost: Rs. "+flights.businessClassCost
+							+"<br><br>");
+					$("#estimatedBill").append("Travel Class: BUSINESS <br>Base Fare (Adults): Rs. "+flights.businessClassCost+" * "+noOfTravelers+"<br><br> Total Fare: Rs. "+(flights.businessClassCost*noOfTravelers));
+				}
+			}
+			
+		})
+	}
+	else{
+		var travelClass = sessionStorage.getItem("TravelClass");
+		var noOfTravelers = sessionStorage.getItem("NoOfTravellers");
+		
+		var response = JSON.parse(sessionStorage.getItem("returnTripDepartureFlights"));
+		var twoWayDepartureSelectedFlightId = sessionStorage.getItem("twoWayDepartureSelectedFlightId");
+		var departureEconomyFare = 0;
+		var returnEconomyFare = 0;
+		var departureBusinessFare = 0;
+		var returnBusinessFare = 0;
+		
+		response.forEach(function (flights) {
+			if(flights.flightId == twoWayDepartureSelectedFlightId){
+				console.log(flights);
+				
+				$("#selectedFlightDetails").append("<div id ='twoWayDepartureResultFlightsDiv' class='twoWayDepartureResultFlightsDiv'> Flight Id.: "+flights.flightId
+						+"<br> Source: "+flights.source
+						+" Departure Time: "+flights.departure
+						+"<br> Destination: "+flights.destination
+						+" Arrival Time: "+flights.arrival
+						+"<br>Duration: "+flights.duration);
+						
+				if(travelClass == "economy"){
+					departureEconomyFare = flights.economyClassCost*noOfTravelers;
+					$("#selectedFlightDetails").append("<br>Economy Class Cost: Rs. "+flights.economyClassCost
+							+"<br><br>");
+					$("#estimatedBill").append("Travel Class: ECONOMY <br>Base Fare (Adults): Rs. "+flights.economyClassCost+" * "+noOfTravelers+"<br><br> Depart Journey Fare: Rs. "+(flights.economyClassCost*noOfTravelers));
+				}
+				else{
+					departureBusinessFare = flights.businessClassCost*noOfTravelers;
+					$("#selectedFlightDetails").append("<br>Business Class Cost: Rs. "+flights.businessClassCost
+							+"<br><br>");
+					$("#estimatedBill").append("Travel Class: BUSINESS <br>Base Fare (Adults): Rs. "+flights.businessClassCost+" * "+noOfTravelers+"<br><br> Depart Journey Fare: Rs. "+(flights.businessClassCost*noOfTravelers));
+				}
+			}
+			
+		})
+		
+		
+		
+		var response = JSON.parse(sessionStorage.getItem("returnTripReturnFlights"));
+		var twoWayReturnSelectedFlightId = sessionStorage.getItem("twoWayReturnSelectedFlightId");
+		
+		response.forEach(function (flights) {
+			if(flights.flightId == twoWayReturnSelectedFlightId){
+				console.log(flights);
+				
+				$("#selectedFlightDetails").append("<div id ='twoWayReturnResultFlightsDiv' class='twoWayReturnResultFlightsDiv'> Flight Id.: "+flights.flightId
+						+"<br> Source: "+flights.source
+						+" Departure Time: "+flights.departure
+						+"<br> Destination: "+flights.destination
+						+" Arrival Time: "+flights.arrival
+						+"<br>Duration: "+flights.duration);
+						
+				if(travelClass == "economy"){
+					returnEconomyFare = flights.economyClassCost*noOfTravelers;
+					$("#selectedFlightDetails").append("<br>Economy Class Cost: Rs. "
+							+flights.economyClassCost
+							+"<br><br>");
+					$("#estimatedBill").append("<br><br>Travel Class: ECONOMY <br>Base Fare (Adults): Rs. "
+							+flights.economyClassCost+" * "
+							+noOfTravelers+"<br><br> Return Journey Fare: Rs. "
+							+(flights.economyClassCost*noOfTravelers)
+							+"<br><br><b>Total Fare: Rs. "
+							+(departureEconomyFare + returnEconomyFare)
+							+"</b>");
+				}
+				else{
+					returnBusinessFare = flights.businessClassCost*noOfTravelers;
+					$("#selectedFlightDetails").append("<br>Business Class Cost: Rs. "
+							+flights.businessClassCost
+							+"<br><br>");
+					$("#estimatedBill").append("<br><br>Travel Class: BUSINESS <br>Base Fare (Adults): Rs. "+flights.businessClassCost
+							+" * "+noOfTravelers+"<br><br> Return Journey Fare: Rs. "
+							+(flights.businessClassCost*noOfTravelers)
+							+"<br><br><b>Total Fare: Rs. "
+							+(departureBusinessFare + returnBusinessFare)
+							+"</b>");
+				}
+			}
+			
+		})
+
+	}
+	
+	
+})
+	
+</script>
+</head>
+<body>
+	 <div id="selectedFlightDetails" class="selectedFlightDetails"></div>
+	 <div id="estimatedBill" class="estimatedBill"></div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Musafir Airlines</title>
+<link rel="stylesheet" type="text/css" href="Airline.css"></link>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+	$(function() {
+		$("#deleteFlightFrm").submit(
+				function(evt) {
+					evt.preventDefault();
+					var obj = {
+						flightId : $("#flightId").val()
+					}
+					$.ajax({
+						url : 'deleteFlight.lti',
+						method : 'POST',
+						data : JSON.stringify(obj),
+						contentType : 'application/json',
+						success : function(response) {
+							//alert(JSON.stringify(response));
+							$("#divDeleteId").append(
+									"<h4>" + response.message + "</h4>");
+						}
+					})
+				})
+	})
+</script>
+</head>
+
+<body>
+	<div class="main">
+		<div class="logo">
+			<img src="Logo.png">
+			<ul>
+				<li><a href="AdminPortal.html">Home</a></li>
+			</ul>
+		</div>
+	</div>
+	<header>
+		<div class="delFlight">
+
+			<form id="deleteFlightFrm">
+
+				<h1>
+					<center>DELETE FLIGHT</center>
+				</h1>
+				<br> <label><center>Enter Flight ID:</label> <input
+					type="number" name="Flightid" id="flightId" required>
+				</center>
+				<br> <br>
+
+				<center>
+					<input type="submit" value="DELETE" id="sub">
+				</center>
+
+			</form>
+			<br>
+			<div id="divDeleteId"></div>
+		</div>
+	</header>
+</body>
+</html>

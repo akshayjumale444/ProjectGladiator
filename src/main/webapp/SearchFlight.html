@@ -25,7 +25,7 @@
 							
 							if (searchJourney == "oneway") {
 								//One Way Trip
-								
+								var singleTripResponse = 0;
 								$.ajax({
 									
 									url : 'searchFlights.lti?source='
@@ -40,23 +40,29 @@
 										alert(JSON.stringify(response));
 										
 										// SessionStorage
-										if (typeof(Storage) !== "undefined") {
+										
  											// Store
  											sessionStorage.setItem("tripType","oneway");
   											sessionStorage.setItem("oneWayTripFlights",JSON.stringify(response));
-  
-										} else {
-  											alert("Sorry, your browser does not support Web Storage...");
-										}
+  											sessionStorage.setItem("NoOfTravellers",searchTravelers);
+  											sessionStorage.setItem("TravelClass",searchClass);
+  											alert(sessionStorage.getItem("TravelClass"));
+  											singleTripResponse == 1;
 										//session end 
-										window.location.href="SelectFlight.html";
+  											
 									}
 								
 								})
-							
+								setInterval(function(){ 
+										if(singleTripResponse == 1){
+											window.location.href="SelectFlight.html";
+										}	
+									}, 1000);
 							}
 							else {
 								// Round Trip
+								var departureResponse = 0;
+								var returnResponse = 0;
 								// Source To Destination
 								$.ajax({
 									url : 'searchFlights.lti?source='
@@ -72,14 +78,15 @@
 									
 									//console.log(JSON.stringify(response));
 									// SessionStorage
-									if (typeof(Storage) !== "undefined") {
+									
 											// Store
 											sessionStorage.setItem("tripType","twoway");
 											sessionStorage.setItem("returnTripDepartureFlights",JSON.stringify(response));
-
-									} else {
-											alert("Sorry, your browser does not support Web Storage...");
-									}
+											sessionStorage.setItem("TravelClass",searchClass);
+											sessionStorage.setItem("NoOfTravellers",searchTravelers);
+  											//alert(sessionStorage.getItem("TravelClass"));
+											departureResponse = 1;
+									
 									//session end
 								
 									alert(sessionStorage.getItem("returnTripDepartureFlights"));
@@ -105,21 +112,26 @@
 									
 									
 									// SessionStorage
-									if (typeof(Storage) !== "undefined") {
+									
 											// Store
 											sessionStorage.setItem("tripType","twoway");
 											sessionStorage.setItem("returnTripReturnFlights",JSON.stringify(response));
-
-									} else {
-											alert("Sorry, your browser does not support Web Storage...");
-									}
+											sessionStorage.setItem("TravelClass",searchClass);
+											sessionStorage.setItem("NoOfTravellers",searchTravelers);
+  											//alert(sessionStorage.getItem("TravelClass"));
+											returnResponse = 1;
+								
 									//session end 
 									alert(sessionStorage.getItem("returnTripReturnFlights"));
 									console.log(sessionStorage.getItem("returnTripReturnFlights"));
 								}
 								});
+								setInterval(function(){ 
+									if(departureResponse == 1 && returnResponse == 1){
+										window.location.href="SelectFlight.html";
+									}	
+								}, 1000);
 								
-								window.location.href="SelectFlight.html";
 							}
 						})
 						
