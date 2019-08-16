@@ -61,4 +61,10 @@ public class AirlineServiceImpl implements AirlineService{
 		return passengerId;
 	}
 
+	public User fetchUserById(int UserId) {
+		
+		User user=gd.fetchById(User.class, UserId);
+		return user;
+	}
+
 }

@@ -12,6 +12,7 @@ public interface AirlineService {
 
 	public List<Flight> searchFlights(String source,String destination,String travelClass,int noOFTravelers);
 	public int addUser(User user);
+	public User fetchUserById(int UserId);
 	public int addBooking(Booking booking);
 	public int addPassenger(Passenger passenger);
 	

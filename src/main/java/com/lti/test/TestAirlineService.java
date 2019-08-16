@@ -58,4 +58,12 @@ public class TestAirlineService {
 		int passengerId=dao.addPassenger(passenger);
 		System.out.println("PassengerId: "+passengerId);
 	}
+	
+	@Test
+	public void testfetchUserById() {
+		User user=new User();
+		
+		user=dao.fetchUserById(122);
+		System.out.println(user.getFname());
+	}
 }

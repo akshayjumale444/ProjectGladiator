@@ -9,9 +9,9 @@ import com.lti.dummy.Dummy;
 @RestController
 public class DummyTime {
 	
-	@PostMapping("/getTime.lti")
+	@PostMapping("/getDate.lti")
 	public String getTime(@RequestBody Dummy d) {
-		System.out.println(d.getDeparture());
+		System.out.println(d.getDate());
 		return "Successfull";
 	}
 
