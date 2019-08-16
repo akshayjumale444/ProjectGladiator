@@ -10,24 +10,53 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lti.dto.DataTransfer;
+import com.lti.dto.Login;
 import com.lti.dto.Status;
 import com.lti.entity.Admin;
 import com.lti.entity.Flight;
 import com.lti.entity.User;
 import com.lti.service.AdminService;
 import com.lti.service.AirlineService;
+import com.lti.service.LoginService;
 
 @RestController
 public class AirlineController {
 
-	//-------------------------------------USER OPERATIONS----------------------------------------------------
+	
 	@Autowired
 	private AirlineService airlineService;
 	
 	@Autowired
 	private AdminService adminService;
 	
+	@Autowired
+	private LoginService loginService;
+	
 	Status status=new Status();
+	
+	//------------------------------------ LOGIN OPERATIONS---------------------------------------------------------
+	
+	@PostMapping("/validateUser.lti")
+	public boolean validateUser(@RequestBody Login login) {
+		
+		boolean result=loginService.validateUser(login.getEmail(), login.getPassword());
+		return result;
+		//true=>Either Username or password is incorrect
+		//false=>is a valid user
+	}
+	
+	@PostMapping("/validateAdmin.lti")
+	public boolean validateAdmin(@RequestBody Login login) {
+		
+		boolean result=loginService.validateAdmin(login.getEmail(), login.getPassword());
+		return result;
+		//true=>Either Username or password is incorrect
+		//false=>is a valid Admin
+	}
+
+	//------------------------------------ LOGIN OPERATIONS ENDS-------------------------------------------------
+	
+	//-------------------------------------USER OPERATIONS-----------------------------------------------------------
 	
 	@GetMapping("/searchFlights.lti")
 	public List<Flight> searchFlightsControl(@RequestParam ("source") String source, @RequestParam ("destination") String destination, @RequestParam ("travelClass") String travelClass, @RequestParam ("noOFTravelers") int noOFTravelers){
@@ -47,8 +76,10 @@ public class AirlineController {
 	}
 	//-------------------------------------USER OPERATIONS ENDS------------------------------------------
 
-	//---------------------------------ADMIN OPERATIONS---------------------------------------------
 
+	//---------------------------------ADMIN OPERATIONS------------------------------------------------------
+	
+	
 	@PostMapping("/addFlight.lti")
 	public Status addFlight(@RequestBody DataTransfer dt) {
 

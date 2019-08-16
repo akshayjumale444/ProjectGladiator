@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Musafir Airlines</title>
+
+<link type="text/css" rel="stylesheet" href="bootstrap.min.css" />
+<link type="text/css" rel="stylesheet" href="Airline.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$(function(){
+	
+	$("#uemail_error_message").hide();
+	$("#upassword_error_message").hide();
+	
+	var error_email=false;
+	var error_password=false;
+	
+	$("#user_email").focusout(function(){
+		check_email();
+		
+	});
+	
+	$("#user_password").focusout(function(){
+		check_password();
+		
+	});
+	
+	function check_email() {
+
+		var pattern = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
+	
+		if($("#user_email").val()==""){
+			$("#uemail_error_message").html("Enter Email!");
+			$("#uemail_error_message").show();
+			error_email = true;
+			
+		}
+		else if(pattern.test($("#user_email").val())) {
+			$("#uemail_error_message").hide();
+		} else {
+			$("#uemail_error_message").html("Invalid email address");
+			$("#uemail_error_message").show();
+			error_email = true;
+		}
+	
+	}
+	
+	function check_password() {
+		
+		var password_length = $("#user_password").val().length;
+		
+		if(password_length==0){
+			$("#upassword_error_message").html("Enter Password!");
+			$("#upassword_error_message").show();
+			error_password = true;
+		}
+		 else {
+			$("#upassword_error_message").hide();
+		}
+	
+	}
+	
+	$("#LoginFrm").submit(function(evt){
+		evt.preventDefault(); 
+		
+		error_email=false;
+		error_password=false;
+		
+		check_email();
+		check_password();
+		
+		if(error_email==false && error_password==false){
+			
+			var obj={
+					email: $("#user_email").val(),
+					password: $("#user_password").val()
+			}
+			$.ajax({
+				url : 'validateAdmin.lti',
+				method : 'POST',
+				data : JSON.stringify(obj),
+				contentType : 'application/json',
+				success : function(response){
+					var responseResult=JSON.stringify(response);
+					alert(responseResult);
+					if(responseResult=="false")
+						window.location.assign("AdminPortal.html");
+					else{
+						$("#divloginError").append("<h5>Invalid Email/Password!!!</h5>");
+						$("#user_email").val("");
+						$("#user_password").val("");
+					}
+						
+				}
+				
+			})
+		}
+	
+	})
+})
+
+</script>
+
+</head>
+<body>
+
+	<div class="loginbox">
+		<h1>Admin Login</h1>
+		<br>
+		<form id="LoginFrm">
+			<div id="divloginError" class="errorMessage"></div>
+			<p>Email</p>
+			<input type="text" name="user_email"  id="user_email" placeholder="Enter Email"/>
+			<span class="error_form" id="uemail_error_message"></span>
+			<br/>
+			<br>
+			<p>Password</p>
+			<input type="Password" name="user_password" id="user_password" placeholder="Enter Password"/><br/>
+			<span class="error_form" id="upassword_error_message"></span>
+			<br/>
+			<br>
+			<input type="submit" name="submit" value="Login">
+			<br/>
+		</form>
+		
+	</div>
+
+
+</body>
+</html>
