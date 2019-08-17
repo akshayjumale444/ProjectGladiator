@@ -93,6 +93,24 @@ public class AirlineServiceImpl implements AirlineService{
 
 		return bookingId;
 	}
+
+	@Transactional
+	public void updateBooking(int bookingId) {
+		
+		List<Passenger> passengerList=airlineOperationsDao.fetchPassenger(bookingId);
+		for(Passenger p:passengerList) {
+			p.setBookingStatus("Confirmed!");
+			gd.save(p);
+		}
+		
+		Booking booking=gd.fetchById(Booking.class, bookingId);
+		int confirmedSeat=booking.getNoOfPassengers();
+		
+		Flight flight=airlineOperationsDao.fetchedFlight(booking);
+		//flight.set
+		
+		
+	}
 	
 	/*@Transactional
 	public int addPassenger(Passenger passenger) {

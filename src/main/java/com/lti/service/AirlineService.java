@@ -14,5 +14,6 @@ public interface AirlineService {
 	public int addUser(User user);
 	public int addBooking(BookingDto bookingDto);
 	//public int addPassenger(Passenger passenger);
+	public void updateBooking(int bookingId);
 	
 }

@@ -89,21 +89,13 @@ public class AirlineController {
 		status.setGeneratedId(bookingId);
 		status.setMessage("Ticket Booking in progress!");
 		return status;
-		/*User user=new User();
-		Flight flight=new Flight();
-		Booking booking=new Booking();
-		Passenger passenger=new Passenger();
 		
-		booking.setJourneyDate(bookingDto.getJourneyDate());
-		booking.setNoOfPassengers(bookingDto.getNoOfPassenger());
-		booking.setCost(bookingDto.getCost());
+	}
+	
+	@PostMapping("/updateBooking.lti")
+	public void updateBooking(@RequestBody int bookingId) {
 		
-		user=airlineService.fetchUserById(bookingDto.getUserId());
-		flight=adminService.fetchFlightById(bookingDto.getFlightId());
-		
-		booking.setUser(user);
-		booking.setFlight(flight);
-		*/
+		airlineService.updateBooking(bookingId);
 	}
 	
 	

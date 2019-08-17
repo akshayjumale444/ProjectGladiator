@@ -101,4 +101,19 @@ public class TestAirlineService {
 		user=dao.fetchUserById(122);
 		System.out.println(user.getFname());
 	}*/
+	
+	@Test
+	public void testUpdateBooking() {
+		
+		dao.updateBooking(161);
+		
+	}
+	
+	/*@Test
+	public void testFetchedFlight() {
+		
+		Flight flight=dao.
+	}*/
 }
+
+
