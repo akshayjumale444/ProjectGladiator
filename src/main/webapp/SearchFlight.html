@@ -2,8 +2,9 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Search Flight</title>
-
+<title>Musafir Airlines</title>
+<link type="text/css" rel="stylesheet" href="bootstrap.min.css" />
+<link type="text/css" rel="stylesheet" href="Airline.css" />
 
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -11,6 +12,7 @@
 	src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
 	$(function() {
+
 		$("#searchFlightForm")
 				.submit(
 						function(evt) {
@@ -20,7 +22,7 @@
 							var searchDestination = $("#destination").val();
 							var searchClass = $("#tavelClass").val();
 							var searchTravelers = $("#noOFTravelers").val();
-							var searchJourney = $("input[name='travelJourney']:checked").val();
+							var searchJourney = $("input[name='flight-type']:checked").val();
 							
 							
 							if (searchJourney == "oneway") {
@@ -47,7 +49,7 @@
   											sessionStorage.setItem("NoOfTravellers",searchTravelers);
   											sessionStorage.setItem("TravelClass",searchClass);
   											alert(sessionStorage.getItem("TravelClass"));
-  											singleTripResponse == 1;
+  											singleTripResponse = 1;
 										//session end 
   											
 									}
@@ -80,7 +82,8 @@
 									// SessionStorage
 									
 											// Store
-											sessionStorage.setItem("tripType","twoway");
+											//sessionStorage.setItem("tripType","twoway");roundtrip
+											sessionStorage.setItem("tripType","roundtrip");
 											sessionStorage.setItem("returnTripDepartureFlights",JSON.stringify(response));
 											sessionStorage.setItem("TravelClass",searchClass);
 											sessionStorage.setItem("NoOfTravellers",searchTravelers);
@@ -114,7 +117,9 @@
 									// SessionStorage
 									
 											// Store
-											sessionStorage.setItem("tripType","twoway");
+											//sessionStorage.setItem("tripType","twoway");
+											//sessionStorage.setItem("tripType","twoway");roundtrip
+											sessionStorage.setItem("tripType","roundtrip");
 											sessionStorage.setItem("returnTripReturnFlights",JSON.stringify(response));
 											sessionStorage.setItem("TravelClass",searchClass);
 											sessionStorage.setItem("NoOfTravellers",searchTravelers);
@@ -128,6 +133,7 @@
 								});
 								setInterval(function(){ 
 									if(departureResponse == 1 && returnResponse == 1){
+										alert("Form submitted");
 										window.location.href="SelectFlight.html";
 									}	
 								}, 1000);
@@ -140,31 +146,143 @@
 
 </head>
 <body>
-	<form id="searchFlightForm">
+
+	<div class="main">
+		<div class="logo">
+			<a href="SearchFlight.html"><img src="Logo.png"></a>
+	    </div>
+		<ul>
+			<li><a href="UserLoginPage.html">Log in</a></li>
+            <!-- <li><a href="#">Sign up</li> -->
+		</ul>
+	</div>
+
+
 	
-		Journey: <br> 
-			<input type="radio" id="travelJourney" name="travelJourney" value="oneway">One Way 
-			<input type="radio" id="travelJourney" name="travelJourney" value="twoway">Two Way 
-			<br><br>
-			
-			From: <Select id="source">
-				<option value="MUMBAI">Mumbai</option>
-				<option value="DELHI">Delhi</option>
-				<option value="PUNE">Pune</option>
-		</Select> <br> <br> To: <Select id="destination">
-			<option value="MUMBAI">Mumbai</option>
-			<option value="DELHI">Delhi</option>
-			<option value="JAIPUR">Jaipur</option>
-		</Select> <br> <br> Departure: <input type="date" id="departure">
-		<br> <br> Travelers: <input type="number" id="noOFTravelers">
-		<br> <br> Travel Class: <Select id="tavelClass">
-			<option value="economy">Economy</option>
-			<option value="business">Business</option>
-		</Select> <br> <br>
-		<button type="submit">Search</button>
-		<br><br><hr><br><br>
-		
-	</form>
-	<div id="searchResults"></div>
+	
+	<!-- UI with style -->
+	
+	
+	<div id="booking" class="section">
+		<div class="section-center">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4">
+						<div class="booking-cta">
+							<h1>WELCOME</h1>
+							<p>Book tickets for your Destination!!</p>
+						</div>
+					</div>
+					<div class="col-md-7 col-md-offset-1">
+						<div class="booking-form">
+							<!--<form>-->
+							<form id="searchFlightForm">
+								<div class="form-group">
+									<div class="form-checkbox">
+										
+										<label for="one-way">
+											<input type="radio" id="one-way" name="flight-type" value="oneway" onclick="returndate.disabled=true"/>
+											<!-- <input type="radio" id="travelJourney" name="flight-type" value="oneway" checked>-->
+											<!-- <input type="radio" id="travelJourney" name="flight-type" value="oneway"> -->
+											<span></span>One way
+										</label>
+										<label for="roundtrip">
+											<input type="radio" id="roundtrip" name="flight-type" value="roundtrip" onclick="returndate.disabled=false"/>
+											<!-- <input type="radio" id="travelJourney" name="flight-type" value="roundtrip">-->
+											<!--<input type="radio" id="travelJourney" name="flight-type" value="twoway"> -->
+											<span></span>Roundtrip
+										</label>
+										 
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<span class="form-label">Flying from</span>
+											<!--<input class="form-control" type="text" placeholder="City or airport">-->
+											<Select id="source" class="form-control">
+												<option value="MUMBAI">Mumbai</option>
+												<option value="DELHI">Delhi</option>
+												<option value="PUNE">Pune</option>
+											</select>
+											<span class="select-arrow"></span>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<span class="form-label">Flying to</span>
+											<!--<input class="form-control" type="text" placeholder="City or airport">-->
+											<Select id="destination" class="form-control">
+												<option value="MUMBAI">Mumbai</option>
+												<option value="DELHI">Delhi</option>
+												<option value="JAIPUR">Jaipur</option>
+											</select>
+											<span class="select-arrow"></span>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<span class="form-label">Departing</span>
+											<!--<input class="form-control" type="date" required> -->
+											<input type="date" id="departure" class="form-control" required>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<span class="form-label">Returning</span>
+											<!-- <input class="form-control" type="date" required> -->
+											<input type="date" id="return" name="returndate" class="form-control" required>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<span class="form-label">Passengers</span>
+											<select id="noOFTravelers" class="form-control">
+												<option>1</option>
+												<option>2</option>
+												<option>3</option>
+												<option>4</option>
+												<option>5</option>
+												<option>6</option>
+												<option>7</option>
+												<option>8</option>
+												<option>9</option>
+											</select>
+											<span class="select-arrow"></span>
+											<!--  <input type="number" id="noOFTravelers" class="form-control"> -->
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<span class="form-label">Travel class</span>
+											<!--<select class="form-control">
+												<option>Economy class</option>
+												<option>Business class</option>
+											</select> -->
+											<Select id="tavelClass" class="form-control">
+												<option value="economy">Economy class</option>
+												<option value="business">Business class</option>
+											</Select>
+											<span class="select-arrow"></span>
+										</div>
+									</div>
+								</div>
+								<div class="form-btn">
+									<button class="submit-btn" type="submit">Show flights</button>
+									<!--<button type="submit" class="submit-btn">Show flights</button>-->
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 </body>
 </html>

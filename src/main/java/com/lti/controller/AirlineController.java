@@ -22,32 +22,32 @@ import com.lti.service.LoginService;
 @RestController
 public class AirlineController {
 
-	
+
 	@Autowired
 	private AirlineService airlineService;
-	
+
 	@Autowired
 	private AdminService adminService;
-	
+
 	@Autowired
 	private LoginService loginService;
-	
+
 	Status status=new Status();
-	
+
 	//------------------------------------ LOGIN OPERATIONS---------------------------------------------------------
-	
+
 	@PostMapping("/validateUser.lti")
 	public boolean validateUser(@RequestBody Login login) {
-		
+
 		boolean result=loginService.validateUser(login.getEmail(), login.getPassword());
 		return result;
 		//true=>Either Username or password is incorrect
 		//false=>is a valid user
 	}
-	
+
 	@PostMapping("/validateAdmin.lti")
 	public boolean validateAdmin(@RequestBody Login login) {
-		
+
 		boolean result=loginService.validateAdmin(login.getEmail(), login.getPassword());
 		return result;
 		//true=>Either Username or password is incorrect
@@ -55,31 +55,31 @@ public class AirlineController {
 	}
 
 	//------------------------------------ LOGIN OPERATIONS ENDS-------------------------------------------------
-	
+
 	//-------------------------------------USER OPERATIONS-----------------------------------------------------------
-	
+
 	@GetMapping("/searchFlights.lti")
 	public List<Flight> searchFlightsControl(@RequestParam ("source") String source, @RequestParam ("destination") String destination, @RequestParam ("travelClass") String travelClass, @RequestParam ("noOFTravelers") int noOFTravelers){
 		System.out.println("Controlled is called ");
-		
+
 		return airlineService.searchFlights(source,destination,travelClass,noOFTravelers);
 	}
-	
+
 	@PostMapping("/addUser.lti")
-	public Status registerUser(@RequestBody User user) {
+	public String registerUser(@RequestBody User user) {
 		int userId=airlineService.addUser(user);
-		
+
 		status.setGeneratedId(userId);
-		status.setMessage("Registration Succesful!!!");
-		return status;
-		
+		status.setMessage("Registration Succesful!!! Login to Proceed");
+		return status.getMessage();
+
 	}
 	//-------------------------------------USER OPERATIONS ENDS------------------------------------------
 
 
 	//---------------------------------ADMIN OPERATIONS------------------------------------------------------
-	
-	
+
+
 	@PostMapping("/addFlight.lti")
 	public Status addFlight(@RequestBody DataTransfer dt) {
 
@@ -99,7 +99,7 @@ public class AirlineController {
 		flight.setAdmin(admin);
 
 		int flightId=adminService.addFlight(flight);
-	
+
 		status.setGeneratedId(flightId);
 		status.setMessage("Flight Added successfully!");
 
@@ -143,7 +143,7 @@ public class AirlineController {
 
 		}
 	}	
-	
+
 	//----------------------------------ADMIN OPERATIONS END-------------------------------------------
 
 }

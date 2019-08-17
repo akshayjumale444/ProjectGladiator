@@ -180,9 +180,11 @@ function check_contact(){
 				data : JSON.stringify(obj), 
 				contentType : 'application/json', 
 				success : function(response){ 
-					//alert(JSON.stringify(response));
-					$("#divReg").append("<h4>"+response.message+"</h4>"
-						+"<h4>Your User Id is "+response.generatedId+"</h4>");
+					alert(JSON.stringify(response));
+					//$("#divReg").append("<h4>"+response.message+"</h4>"
+						//+"<h4>Your User Id is "+response.generatedId+"</h4>");
+					
+					window.location.assign("UserLoginPage.html");
 					
 					//Clearing the field in the form after successful registration. 
 					$("#ufname").val("");
@@ -238,7 +240,7 @@ function check_contact(){
 			<input type="submit" class="regsubmit" value="Register" />
 
 			<p class="info">
-				Already have an account? <a href="loginpage.html">Sign in</a>
+				Already have an account? <a href="UserLoginPage.html">Login</a>
 			</p>
 	</form>
 	<div id="divReg"></div>

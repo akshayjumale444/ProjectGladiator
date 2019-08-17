@@ -27,12 +27,12 @@ public class Admin{
 
 	@Column(name="ADMIN_EMAIL")
 	private String adminEmail;
-	
+
 	//A single admin can add multiple flight
 	//Admin=>Flight(OneToMany)
 	@OneToMany(mappedBy="admin")
-	private Set<Flight> flightList=new HashSet();
-	
+	private Set<Flight> flightList;
+
 	public int getAdminId() {
 		return adminId;
 	}

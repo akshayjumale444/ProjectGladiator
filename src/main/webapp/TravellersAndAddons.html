@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Musafir Airlines</title>
+<link type="text/css" rel="stylesheet" href="bootstrap.min.css" />
+<link type="text/css" rel="stylesheet" href="Airline.css" />
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	
+	<script>
+	
+	$(function() {
+		//var noOfTrvellers = sessionStorage.getItem("NoOfTravellers");
+		var noOfTrvellers = 3;
+		for( i = 0; i<noOfTrvellers; i++){
+			var fieldset = $("<fieldset />");
+			$("#travellersDetails").append(fieldset);
+			fieldset.append("<legend>Passenger "+ (i+1)+"</legend>");
+			
+			// Passenger Name
+			$(fieldset).append("Name: ");
+			var passengerName = $("<input/>");
+			passengerName.attr("name","passengerName["+i+"]");
+			$(fieldset).append(passengerName);
+			
+			// Passenger Age
+			$(fieldset).append("<br><br>Age: ");
+			var passengerAge = $("<input/>");
+			passengerAge.attr("name","passengerAge["+i+"]");
+			//passangerAge.attr("type","number");
+			$(fieldset).append(passengerAge);
+			
+			// Passenger Gender
+			$(fieldset).append("<br><br>Gender: ");
+			
+			// Male
+			var pessengerGender = $("<input type='radio'/>");
+			pessengerGender
+				.attr("name", "pessengerGender["+i+"]")
+				.addClass("pessengerGender")
+				.attr("value", "MALE")
+				.attr('checked',true);
+			$(fieldset).append(pessengerGender);
+			$(fieldset).append(" Male ");
+			
+			// Female
+			var pessengerGender = $("<input type='radio'/>");
+			pessengerGender
+				.attr("name", "pessengerGender["+i+"]")
+				.addClass("pessengerGender")
+				.attr("value", "FEMALE");
+			$(fieldset).append(pessengerGender);
+			$(fieldset).append(" Female ");	
+			
+			$("#travellersDetails").append(fieldset);
+		}
+		
+		// Passenger Contact To share booking inforamation
+		var contactFieldset = $("<fieldset />");
+		$("#bookingEmailId").append(contactFieldset);
+		contactFieldset.append("<legend>Contact Information</legend>");
+		
+		$(contactFieldset).append("Email Id.: ");
+		var contactEmailId = $("<input/>");
+		contactEmailId.attr("name","contactEmailId");
+		$(contactFieldset).append(contactEmailId);
+		$("#bookingEmailId").append(contactFieldset);
+		
+		// Submit Button
+		// Button creation (formSubmitButton)
+		var submitButton = $("<button />");
+		$("#formSubmitButton").append(submitButton);
+		submitButton.attr("class", "submittedDetails");
+		submitButton.attr("submitId", "submittedDetails");
+		submitButton.text("Submit");
+		
+		
+			
+			$("#passengersForm").on("submit", function(evt) {
+				 evt.preventDefault();
+				 var data = $(this).serialize();
+				 alert(data);
+				
+				});
+		
+	});
+	
+	</script>
+	
+</head>
+<body>
+	<!-- User Interface Static Part -->
+	
+	<div class="main">
+		<div class="logo">
+			<img src="Logo.png">
+	    </div>
+		<ul>
+			<li><a href="#">Log in</a></li>
+            <li><a href="#">Sign up</li>
+		</ul>
+	</div>
+	<div class="container2">
+		<ul class="progressbar">
+			<li>Flight Selection</li>
+			<li class="active">Review</li>
+			<li>Traveller and Addons</li>
+			<li>Make Payment</li>
+		</ul>
+		</div>
+	
+	<!-- END -->
+	
+	<br><br><br><br><hr><br>
+	<form id="passengersForm">
+		 <div id="travellersDetails" class="travellersDetails"></div>
+		 <br><br><br>
+	 	<div id="bookingEmailId" class="bookingEmailId"></div>
+	 	 <br><br><br>
+	 	 <div id="formSubmitButton" class="formSubmitButton"></div>
+	 	 <br><br><br>
+	</form>
+	
+</body>
+</html>

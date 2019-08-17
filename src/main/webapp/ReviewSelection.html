@@ -3,6 +3,9 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Review Selection</title>
+<link type="text/css" rel="stylesheet" href="bootstrap.min.css" />
+<link type="text/css" rel="stylesheet" href="Airline.css" />
+
 <style>
 	.selectedFlightDetails{
 		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -56,12 +59,12 @@ $(function(){
 				if(travelClass == "economy"){
 					$("#selectedFlightDetails").append("<br>Economy Class Cost: Rs. "+flights.economyClassCost
 							+"<br><br>");
-					$("#estimatedBill").append("Travel Class: ECONOMY <br>Base Fare (Adults): Rs. "+flights.economyClassCost+" * "+noOfTravelers+"<br><br> Total Fare: Rs. "+(flights.economyClassCost*noOfTravelers));
+					$("#estimatedBill").append("Travel Class: ECONOMY <br>Base Fare (Adults): Rs. "+flights.economyClassCost+" * "+noOfTravelers+" (Adults)<br><br> Total Fare: Rs. "+(flights.economyClassCost*noOfTravelers));
 				}
 				else{
 					$("#selectedFlightDetails").append("<br>Business Class Cost: Rs. "+flights.businessClassCost
 							+"<br><br>");
-					$("#estimatedBill").append("Travel Class: BUSINESS <br>Base Fare (Adults): Rs. "+flights.businessClassCost+" * "+noOfTravelers+"<br><br> Total Fare: Rs. "+(flights.businessClassCost*noOfTravelers));
+					$("#estimatedBill").append("Travel Class: BUSINESS <br>Base Fare (Adults): Rs. "+flights.businessClassCost+" * "+noOfTravelers+" (Adults)<br><br> Total Fare: Rs. "+(flights.businessClassCost*noOfTravelers));
 				}
 			}
 			
@@ -93,13 +96,13 @@ $(function(){
 					departureEconomyFare = flights.economyClassCost*noOfTravelers;
 					$("#selectedFlightDetails").append("<br>Economy Class Cost: Rs. "+flights.economyClassCost
 							+"<br><br>");
-					$("#estimatedBill").append("Travel Class: ECONOMY <br>Base Fare (Adults): Rs. "+flights.economyClassCost+" * "+noOfTravelers+"<br><br> Depart Journey Fare: Rs. "+(flights.economyClassCost*noOfTravelers));
+					$("#estimatedBill").append("Travel Class: ECONOMY <br>Base Fare (Adults): Rs. "+flights.economyClassCost+" * "+noOfTravelers+" (Adults)<br><br> Depart Journey Fare: Rs. "+(flights.economyClassCost*noOfTravelers));
 				}
 				else{
 					departureBusinessFare = flights.businessClassCost*noOfTravelers;
 					$("#selectedFlightDetails").append("<br>Business Class Cost: Rs. "+flights.businessClassCost
 							+"<br><br>");
-					$("#estimatedBill").append("Travel Class: BUSINESS <br>Base Fare (Adults): Rs. "+flights.businessClassCost+" * "+noOfTravelers+"<br><br> Depart Journey Fare: Rs. "+(flights.businessClassCost*noOfTravelers));
+					$("#estimatedBill").append("Travel Class: BUSINESS <br>Base Fare (Adults): Rs. "+flights.businessClassCost+" * "+noOfTravelers+" (Adults)<br><br> Depart Journey Fare: Rs. "+(flights.businessClassCost*noOfTravelers));
 				}
 			}
 			
@@ -128,7 +131,7 @@ $(function(){
 							+"<br><br>");
 					$("#estimatedBill").append("<br><br>Travel Class: ECONOMY <br>Base Fare (Adults): Rs. "
 							+flights.economyClassCost+" * "
-							+noOfTravelers+"<br><br> Return Journey Fare: Rs. "
+							+noOfTravelers+" (Adults)<br><br> Return Journey Fare: Rs. "
 							+(flights.economyClassCost*noOfTravelers)
 							+"<br><br><b>Total Fare: Rs. "
 							+(departureEconomyFare + returnEconomyFare)
@@ -140,7 +143,7 @@ $(function(){
 							+flights.businessClassCost
 							+"<br><br>");
 					$("#estimatedBill").append("<br><br>Travel Class: BUSINESS <br>Base Fare (Adults): Rs. "+flights.businessClassCost
-							+" * "+noOfTravelers+"<br><br> Return Journey Fare: Rs. "
+							+" * "+noOfTravelers+" (Adults)<br><br> Return Journey Fare: Rs. "
 							+(flights.businessClassCost*noOfTravelers)
 							+"<br><br><b>Total Fare: Rs. "
 							+(departureBusinessFare + returnBusinessFare)
@@ -158,6 +161,29 @@ $(function(){
 </script>
 </head>
 <body>
+
+	<!-- User Interface Static Part -->
+	
+	<div class="main">
+		<div class="logo">
+			<a href="SearchFlight.html"><img src="Logo.png"></a>
+	    </div>
+		<ul>
+			<li><a href="UserLoginPage.html">Log in</a></li>
+            <!--  <li><a href="#">Sign up</li> -->
+		</ul>
+	</div>
+	<div class="container2">
+		<ul class="progressbar">
+			<li class="active">Flight Selection</li>
+			<li class="active">Review</li>
+			<li>Traveller and Addons</li>
+			<li>Make Payment</li>
+		</ul>
+		</div>
+	
+	<!-- END -->
+	<br><br><br><br><hr><br>
 	 <div id="selectedFlightDetails" class="selectedFlightDetails"></div>
 	 <div id="estimatedBill" class="estimatedBill"></div>
 </body>
