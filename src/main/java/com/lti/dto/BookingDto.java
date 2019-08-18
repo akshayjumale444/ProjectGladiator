@@ -13,6 +13,7 @@ public class BookingDto {
 	private int userId;
 	private int flightId;
 	private String emailId;
+	//private String travelClass;
 	
 	private List<Passenger> passengerList;
 
