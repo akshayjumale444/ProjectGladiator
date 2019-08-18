@@ -5,7 +5,8 @@
 <title>Review Selection</title>
 <link type="text/css" rel="stylesheet" href="bootstrap.min.css" />
 <link type="text/css" rel="stylesheet" href="Airline.css" />
-
+<link rel="stylesheet" type="text/css" href="ReviewFlight.css"></link>
+<!--
 <style>
 	.selectedFlightDetails{
 		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -30,6 +31,7 @@
 	}
 	
 </style>
+-->
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script
 	src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -60,11 +62,15 @@ $(function(){
 					$("#selectedFlightDetails").append("<br>Economy Class Cost: Rs. "+flights.economyClassCost
 							+"<br><br>");
 					$("#estimatedBill").append("Travel Class: ECONOMY <br>Base Fare (Adults): Rs. "+flights.economyClassCost+" * "+noOfTravelers+" (Adults)<br><br> Total Fare: Rs. "+(flights.economyClassCost*noOfTravelers));
+					sessionStorage.setItem("oneWayJourneyCost", (flights.economyClassCost*noOfTravelers));
+					sessionStorage.setItem("totalCost", (flights.economyClassCost*noOfTravelers));
 				}
 				else{
 					$("#selectedFlightDetails").append("<br>Business Class Cost: Rs. "+flights.businessClassCost
 							+"<br><br>");
 					$("#estimatedBill").append("Travel Class: BUSINESS <br>Base Fare (Adults): Rs. "+flights.businessClassCost+" * "+noOfTravelers+" (Adults)<br><br> Total Fare: Rs. "+(flights.businessClassCost*noOfTravelers));
+					sessionStorage.setItem("oneWayJourneyCost", (flights.businessClassCost*noOfTravelers));
+					sessionStorage.setItem("totalCost", (flights.businessClassCost*noOfTravelers));
 				}
 			}
 			
@@ -97,12 +103,14 @@ $(function(){
 					$("#selectedFlightDetails").append("<br>Economy Class Cost: Rs. "+flights.economyClassCost
 							+"<br><br>");
 					$("#estimatedBill").append("Travel Class: ECONOMY <br>Base Fare (Adults): Rs. "+flights.economyClassCost+" * "+noOfTravelers+" (Adults)<br><br> Depart Journey Fare: Rs. "+(flights.economyClassCost*noOfTravelers));
+					sessionStorage.setItem("roundTripDepartureJourneyCost", (flights.economyClassCost*noOfTravelers));
 				}
 				else{
 					departureBusinessFare = flights.businessClassCost*noOfTravelers;
 					$("#selectedFlightDetails").append("<br>Business Class Cost: Rs. "+flights.businessClassCost
 							+"<br><br>");
 					$("#estimatedBill").append("Travel Class: BUSINESS <br>Base Fare (Adults): Rs. "+flights.businessClassCost+" * "+noOfTravelers+" (Adults)<br><br> Depart Journey Fare: Rs. "+(flights.businessClassCost*noOfTravelers));
+					sessionStorage.setItem("roundTripDepartureJourneyCost", (flights.businessClassCost*noOfTravelers));
 				}
 			}
 			
@@ -136,6 +144,8 @@ $(function(){
 							+"<br><br><b>Total Fare: Rs. "
 							+(departureEconomyFare + returnEconomyFare)
 							+"</b>");
+					sessionStorage.setItem("roundTripReturnJourneyCost", (flights.economyClassCost*noOfTravelers));
+					sessionStorage.setItem("totalCost", (departureEconomyFare + returnEconomyFare));
 				}
 				else{
 					returnBusinessFare = flights.businessClassCost*noOfTravelers;
@@ -148,6 +158,8 @@ $(function(){
 							+"<br><br><b>Total Fare: Rs. "
 							+(departureBusinessFare + returnBusinessFare)
 							+"</b>");
+					sessionStorage.setItem("roundTripReturnJourneyCost", (flights.businessClassCost*noOfTravelers));
+					sessionStorage.setItem("totalCost", (departureBusinessFare + returnBusinessFare));
 				}
 			}
 			
@@ -184,7 +196,13 @@ $(function(){
 	
 	<!-- END -->
 	<br><br><br><br><hr><br>
-	 <div id="selectedFlightDetails" class="selectedFlightDetails"></div>
-	 <div id="estimatedBill" class="estimatedBill"></div>
+	 <!--<div id="selectedFlightDetails" class="selectedFlightDetails"></div>-->
+	 <!--<div id="estimatedBill" class="estimatedBill"></div>-->
+	 
+	 <div class="grid-container">
+		<div class="grid1"><div id="selectedFlightDetails" class="selectedFlightDetails"></div></div>
+		<div class="grid2"><div id="estimatedBill" class="estimatedBill"></div></div>
+	 </div>
+	<center><a href="UserLoginPage.html"><button type="submit">Continue</button></a></center> 
 </body>
 </html>

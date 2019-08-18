@@ -28,6 +28,9 @@ public class Booking {
 	@Column(name="DESTINATION")
 	private String destination;
 	
+	@Column(name="BOOKING_DATE")
+	private LocalDate bookingDate;
+	
 	@Column(name="JOURNEY_DATE")
 	private LocalDate journeyDate;
 	
@@ -36,6 +39,9 @@ public class Booking {
 	
 	@Column(name="COST")
 	private double cost;
+	
+	@Column(name="TICKET_MAILING_ID")
+	private String ticketMailingId;
 	
 	@OneToOne
 	@JoinColumn(name="USER_ID_FK")
@@ -71,6 +77,16 @@ public class Booking {
 	public void setDestination(String destination) {
 		this.destination = destination;
 	}
+	
+	
+
+	public LocalDate getBookingDate() {
+		return bookingDate;
+	}
+
+	public void setBookingDate(LocalDate bookingDate) {
+		this.bookingDate = bookingDate;
+	}
 
 	public LocalDate getJourneyDate() {
 		return journeyDate;
@@ -94,6 +110,15 @@ public class Booking {
 
 	public void setCost(double cost) {
 		this.cost = cost;
+	}
+	
+	
+	public String getTicketMailingId() {
+		return ticketMailingId;
+	}
+
+	public void setTicketMailingId(String ticketMailingId) {
+		this.ticketMailingId = ticketMailingId;
 	}
 
 	public User getUser() {

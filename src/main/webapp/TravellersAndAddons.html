@@ -10,9 +10,10 @@
 	src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	
 	<script>
+	
 	$(function() {
-		//var noOfTrvellers = sessionStorage.getItem("NoOfTravellers");
-		var noOfTrvellers = 3;
+		var noOfTrvellers = sessionStorage.getItem("NoOfTravellers");
+		//var noOfTrvellers = 3;
 		for( i = 0; i<noOfTrvellers; i++){
 			var fieldset = $("<fieldset />");
 			$("#travellersDetails").append(fieldset);
@@ -21,13 +22,13 @@
 			// Passenger Name
 			$(fieldset).append("Name: ");
 			var passengerName = $("<input/>");
-			passengerName.attr("name","passengerName["+i+"]");
+			passengerName.attr("name","passengerList["+i+"].name");
 			$(fieldset).append(passengerName);
 			
 			// Passenger Age
 			$(fieldset).append("<br><br>Age: ");
 			var passengerAge = $("<input/>");
-			passengerAge.attr("name","passengerAge["+i+"]");
+			passengerAge.attr("name","passengerList["+i+"].age");
 			//passangerAge.attr("type","number");
 			$(fieldset).append(passengerAge);
 			
@@ -37,7 +38,7 @@
 			// Male
 			var pessengerGender = $("<input type='radio'/>");
 			pessengerGender
-				.attr("name", "pessengerGender["+i+"]")
+				.attr("name", "passengerList["+i+"].gender")
 				.addClass("pessengerGender")
 				.attr("value", "MALE")
 				.attr('checked',true);
@@ -47,7 +48,7 @@
 			// Female
 			var pessengerGender = $("<input type='radio'/>");
 			pessengerGender
-				.attr("name", "pessengerGender["+i+"]")
+				.attr("name", "passengerList["+i+"].gender")
 				.addClass("pessengerGender")
 				.attr("value", "FEMALE");
 			$(fieldset).append(pessengerGender);
@@ -63,9 +64,30 @@
 		
 		$(contactFieldset).append("Email Id.: ");
 		var contactEmailId = $("<input/>");
-		contactEmailId.attr("name","contactEmailId");
+		contactEmailId.attr("name","emailId");
 		$(contactFieldset).append(contactEmailId);
 		$("#bookingEmailId").append(contactFieldset);
+		
+		// Hidden Fields for booking 
+		/*
+		var custIdHidden = $("<input />");
+		custIdHidden.attr("type", "hidden");
+		custIdHidden.attr("name", "customerId");
+		custIdHidden.attr("value", custId);
+		
+		$("#passengersForm").append(custIdHidden);
+		
+		var custIdHidden = $("<input />");
+		custIdHidden.attr("type", "hidden");
+		custIdHidden.attr("name", "routeId");
+		custIdHidden.attr("value", custId);
+		
+		$("#passengersForm").append(custIdHidden);
+		*/
+		
+		
+		
+		
 		
 		// Submit Button
 		// Button creation (formSubmitButton)
@@ -79,8 +101,183 @@
 			
 			$("#passengersForm").on("submit", function(evt) {
 				 evt.preventDefault();
-				 var data = $(this).serialize();
-				 alert(data);
+				 //var data = $(this).serialize();
+				 //alert(data);
+				 
+					// ----------------------------------------------AJAX CALLS ---------------------------------
+					if(sessionStorage.getItem("tripType")=="oneway"){
+			
+						var departureJourneyDate = sessionStorage.getItem("departureJourneyDate");
+						var departureJourneyDateHidden = $("<input />");
+						departureJourneyDateHidden.attr("type", "hidden");
+						departureJourneyDateHidden.attr("name", "journeyDate");
+						departureJourneyDateHidden.attr("value", departureJourneyDate);
+						$("#bookingEmailId").append(departureJourneyDateHidden);
+						
+						var noOfTrvellers = sessionStorage.getItem("NoOfTravellers");
+						var noOfTrvellersHidden = $("<input />");
+						noOfTrvellersHidden.attr("type", "hidden");
+						noOfTrvellersHidden.attr("name", "noOfPassenger");
+						noOfTrvellersHidden.attr("value", noOfTrvellers);
+						$("#bookingEmailId").append(noOfTrvellersHidden);
+						
+						var oneWayJourneyCost = sessionStorage.getItem("oneWayJourneyCost");
+						var oneWayJourneyCostHidden = $("<input />");
+						oneWayJourneyCostHidden.attr("type", "hidden");
+						oneWayJourneyCostHidden.attr("name","cost");
+						oneWayJourneyCostHidden.attr("value", oneWayJourneyCost);
+						$("#bookingEmailId").append(oneWayJourneyCostHidden);
+						
+						var userId = sessionStorage.getItem("userId");
+						var userIdHidden = $("<input />");
+						userIdHidden.attr("type", "hidden");
+						userIdHidden.attr("name", "userId");
+						userIdHidden.attr("value", userId);
+						$("#bookingEmailId").append(userIdHidden);
+						
+						var flightId = sessionStorage.getItem("oneWaySelectedFlightId");
+						var flightIdHidden = $("<input />");
+						flightIdHidden.attr("type", "hidden");
+						flightIdHidden.attr("name", "flightId");
+						flightIdHidden.attr("value", flightId);
+						$("#bookingEmailId").append(flightIdHidden);
+						
+						var singleTripResponse = 0;
+						
+						var data = $(this).serialize();
+						alert(data);
+						
+						$.ajax({
+												
+							url : 'bookingTicket.lti',
+							method : 'POST',
+							data : data,
+							//contentType: 'application/json',
+							success : function(response) {	
+								alert(JSON.stringify(response));
+								singleTripResponse = 1;
+							}
+						});
+						
+						setInterval(function(){ 
+							if(singleTripResponse == 1){
+								window.location.href="PaymentPortal.html";
+							}	
+						}, 1000);
+						
+					}
+					else{
+					
+						/*
+							sessionStorage.setItem("twoWayDepartureSelectedFlightId",twoWayDepartureFlightID);
+							sessionStorage.setItem("twoWayReturnSelectedFlightId",twoWayReturnFlightID);
+						*/
+						var departureResponse = 0;
+						var returnResponse = 0;
+						
+						// Departure Flight
+						
+						var departureJourneyDate = sessionStorage.getItem("departureJourneyDate");
+						var departureJourneyDateHidden = $("<input />");
+						departureJourneyDateHidden.attr("type", "hidden");
+						departureJourneyDateHidden.attr("name", "journeyDate");
+						departureJourneyDateHidden.attr("value", departureJourneyDate);
+						$("#bookingEmailId").append(departureJourneyDateHidden);
+						
+						var noOfTrvellers = sessionStorage.getItem("NoOfTravellers");
+						var noOfTrvellersHidden = $("<input />");
+						noOfTrvellersHidden.attr("type", "hidden");
+						noOfTrvellersHidden.attr("name", "noOfPassenger");
+						noOfTrvellersHidden.attr("value", noOfTrvellers);
+						$("#bookingEmailId").append(noOfTrvellersHidden);
+						
+						var roundTripDepartureJourneyCost = sessionStorage.getItem("roundTripDepartureJourneyCost");
+						var roundTripDepartureJourneyCostHidden = $("<input />");
+						roundTripDepartureJourneyCostHidden.attr("type", "hidden");
+						roundTripDepartureJourneyCostHidden.attr("name","cost");
+						roundTripDepartureJourneyCostHidden.attr("value", roundTripDepartureJourneyCost);
+						$("#bookingEmailId").append(roundTripDepartureJourneyCostHidden);
+						
+						var userId = sessionStorage.getItem("userId");
+						var userIdHidden = $("<input />");
+						userIdHidden.attr("type", "hidden");
+						userIdHidden.attr("name", "userId");
+						userIdHidden.attr("value", userId);
+						$("#bookingEmailId").append(userIdHidden);
+						
+						var departureFlightId = sessionStorage.getItem("twoWayDepartureSelectedFlightId");
+						var flightIdHidden = $("<input />");
+						flightIdHidden.attr("type", "hidden");
+						flightIdHidden.attr("name", "flightId");
+						flightIdHidden.attr("value", departureFlightId);
+						$("#bookingEmailId").append(flightIdHidden);
+						
+						var data = $(this).serialize();
+						alert(data);
+						
+						$.ajax({
+												
+							url : 'bookingTicket.lti',
+							method : 'POST',
+							data : data,
+							//contentType: 'application/json',
+							success : function(response) {	
+								alert(JSON.stringify(response));
+								departureResponse = 1;
+							}
+						});
+						
+						
+						// Return Flight
+						
+						var returnJourneyDate = sessionStorage.getItem("returnJourneyDate");
+						/*var departureJourneyDateHidden = $("<input />");
+						departureJourneyDateHidden.attr("type", "hidden");
+						departureJourneyDateHidden.attr("name", "journeyDate");*/
+						departureJourneyDateHidden.attr("value", returnJourneyDate);
+						$("#bookingEmailId").append(departureJourneyDateHidden);
+						
+						
+						
+						var roundTripReturnJourneyCost = sessionStorage.getItem("roundTripReturnJourneyCost");
+						/*var roundTripDepartureJourneyCostHidden = $("<input />");
+						roundTripDepartureJourneyCostHidden.attr("type", "hidden");
+						roundTripDepartureJourneyCostHidden.attr("name","cost");*/
+						roundTripDepartureJourneyCostHidden.attr("value", roundTripReturnJourneyCost);
+						$("#bookingEmailId").append(roundTripDepartureJourneyCostHidden);
+						
+						
+						
+						var returnFlightId = sessionStorage.getItem("twoWayReturnSelectedFlightId");
+						/*var flightIdHidden = $("<input />");
+						flightIdHidden.attr("type", "hidden");
+						flightIdHidden.attr("name", "flightId");*/
+						flightIdHidden.attr("value", returnFlightId);
+						$("#bookingEmailId").append(flightIdHidden);
+						
+						var data = $(this).serialize();
+						alert(data);
+						
+						$.ajax({
+												
+							url : 'bookingTicket.lti',
+							method : 'POST',
+							data : data,
+							//contentType: 'application/json',
+							success : function(response) {	
+								alert(JSON.stringify(response));
+								returnResponse = 1;
+							}
+						});
+						
+						
+						setInterval(function(){ 
+							if(departureResponse == 1 && returnResponse == 1){
+							//alert("Form submitted");
+							window.location.href="PaymentPortal.html";
+							}	
+						}, 1000);
+					}
 				
 				});
 		

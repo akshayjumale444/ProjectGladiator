@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lti.dto.BookingDto;
 import com.lti.dto.DataTransfer;
 import com.lti.dto.Login;
+import com.lti.dto.LoginStatus;
 import com.lti.dto.Status;
 import com.lti.entity.Admin;
-import com.lti.entity.Booking;
 import com.lti.entity.Flight;
-import com.lti.entity.Passenger;
 import com.lti.entity.User;
 import com.lti.service.AdminService;
 import com.lti.service.AirlineService;
@@ -40,12 +39,16 @@ public class AirlineController {
 	//------------------------------------ LOGIN OPERATIONS---------------------------------------------------------
 
 	@PostMapping("/validateUser.lti")
-	public boolean validateUser(@RequestBody Login login) {
+	public LoginStatus validateUser(@RequestBody Login login) {
 
-		boolean result=loginService.validateUser(login.getEmail(), login.getPassword());
-		return result;
+		LoginStatus loginStatus=loginService.validateUser(login.getEmail(), login.getPassword());
+		return loginStatus;
+		
+		//boolean result=loginService.validateUser(login.getEmail(), login.getPassword());
+		//return result;
 		//true=>Either Username or password is incorrect
 		//false=>is a valid user
+		
 	}
 
 	@PostMapping("/validateAdmin.lti")
@@ -79,15 +82,18 @@ public class AirlineController {
 	}
 	
 	@PostMapping("/bookingTicket.lti")
-	public void bookTicket(@RequestBody BookingDto bookingDto) {
+	public Status addBooking( BookingDto bookingDto) {
 		
-		User user=new User();
+		int bookingId=airlineService.addBooking(bookingDto);
+		//System.out.println("BookingId:"+bookingId);
+		status.setGeneratedId(bookingId);
+		status.setMessage("Ticket Booking in progress!");
+		return status;
+		/*User user=new User();
 		Flight flight=new Flight();
 		Booking booking=new Booking();
 		Passenger passenger=new Passenger();
 		
-		booking.setSource(bookingDto.getSource());
-		booking.setDestination(bookingDto.getDestination());
 		booking.setJourneyDate(bookingDto.getJourneyDate());
 		booking.setNoOfPassengers(bookingDto.getNoOfPassenger());
 		booking.setCost(bookingDto.getCost());
@@ -97,7 +103,7 @@ public class AirlineController {
 		
 		booking.setUser(user);
 		booking.setFlight(flight);
-		
+		*/
 	}
 	//-------------------------------------USER OPERATIONS ENDS------------------------------------------
 

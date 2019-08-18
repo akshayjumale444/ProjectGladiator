@@ -83,10 +83,13 @@ $(function(){
 				data : JSON.stringify(obj),
 				contentType : 'application/json',
 				success : function(response){
-					var responseResult=JSON.stringify(response);
-					alert(responseResult);
-					if(responseResult=="false")
-						window.location.assign("UserRegistration.html");
+					alert(JSON.stringify(response));
+					alert(response.result);
+					alert(response.fetchedUserId);
+					sessionStorage.setItem("userId",response.fetchedUserId);
+					var responseResult=JSON.stringify(response.result);
+					if(responseResult=="true")
+						window.location.assign("TravellersAndAddons.html");
 					else{
 						$("#divloginError").append("<h5>Invalid Email/Password!!!</h5>");
 						$("#user_email").val("");

@@ -13,7 +13,7 @@
 
 	<!-- Enabling support for JSON parsing, validation and other features of 
 		Spring MVC -->
-	<mvc:annotation-driven />
+	 <mvc:annotation-driven />
 
 	<!-- Loading annotated beans -->
 	<context:component-scan

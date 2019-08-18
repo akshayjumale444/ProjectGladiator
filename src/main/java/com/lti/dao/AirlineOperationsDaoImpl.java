@@ -2,20 +2,25 @@ package com.lti.dao;
 
 import java.util.List;
 
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.lti.entity.Flight;
+import com.lti.entity.Passenger;
+import com.lti.entity.User;
 
 @Repository
 public class AirlineOperationsDaoImpl implements AirlineOperationsDao{
 
 	@PersistenceContext
 	protected EntityManager entityManager;
+	
+	@Autowired
+	GenericDao dao;
 	
 	/*
 	public List<Flight> searchFlightOperation() {
@@ -62,5 +67,19 @@ public class AirlineOperationsDaoImpl implements AirlineOperationsDao{
 		}
 		//return query.getResultList();
 	}
+	
+public User fetchUserById(int UserId) {
+		
+		User user=dao.fetchById(User.class, UserId);
+		return user;
+	}
+
+public void addPassenger(Passenger passenger) {
+
+	Passenger fetchedPassenger=(Passenger)dao.save(passenger);
+	//int passengerId=fetchedPassenger.getPassengerId();
+	//return passengerId;
+}
+
 
 }

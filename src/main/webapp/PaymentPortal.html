@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Musafir Airlines</title>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+	$(function() {
+
+		$("#paymentForm").submit(function(evt) {
+			evt.preventDefault();
+			var amount = sessionStorage.getItem("totalCost");
+			window.location.href = "http://192.168.100.198:8087/final_project/DollarUnionRedirect.html?toAccno=643&amount="+amount+"&redirectUrl=http://192.168.100.41:8086/musafir_airlines/TicketGeneration.html";
+		});
+	});
+</script>
+</head>
+<body>
+	<form id="paymentForm">
+		Proceed for Payment
+		<button  type="submit">Pay Now</button>
+	</form>
+	
+</body>
+</html>

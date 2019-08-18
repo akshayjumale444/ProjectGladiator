@@ -23,7 +23,8 @@
 							var searchClass = $("#tavelClass").val();
 							var searchTravelers = $("#noOFTravelers").val();
 							var searchJourney = $("input[name='flight-type']:checked").val();
-							
+							var searchDepartureDate = ($("#departureDate").val());
+							var searchReturnDate = ($("#returnDate").val());
 							
 							if (searchJourney == "oneway") {
 								//One Way Trip
@@ -48,7 +49,13 @@
   											sessionStorage.setItem("oneWayTripFlights",JSON.stringify(response));
   											sessionStorage.setItem("NoOfTravellers",searchTravelers);
   											sessionStorage.setItem("TravelClass",searchClass);
+  											sessionStorage.setItem("oneWaySource",searchSource);
+  											sessionStorage.setItem("oneWayDestination",searchDestination);
+  											sessionStorage.setItem("departureJourneyDate", searchDepartureDate);
+  											//sessionStorage.setItem("returnJourneyDate", searchReturnDate);
+  											
   											alert(sessionStorage.getItem("TravelClass"));
+  											alert(sessionStorage.getItem("departureJourneyDate"));
   											singleTripResponse = 1;
 										//session end 
   											
@@ -87,6 +94,11 @@
 											sessionStorage.setItem("returnTripDepartureFlights",JSON.stringify(response));
 											sessionStorage.setItem("TravelClass",searchClass);
 											sessionStorage.setItem("NoOfTravellers",searchTravelers);
+											sessionStorage.setItem("roundTripDepartureSource",searchSource);
+  											sessionStorage.setItem("roundTripDepartureDestination",searchDestination);
+  											sessionStorage.setItem("departureJourneyDate", searchDepartureDate);
+  											//sessionStorage.setItem("returnJourneyDate", searchReturnDate);
+  											
   											//alert(sessionStorage.getItem("TravelClass"));
 											departureResponse = 1;
 									
@@ -123,6 +135,11 @@
 											sessionStorage.setItem("returnTripReturnFlights",JSON.stringify(response));
 											sessionStorage.setItem("TravelClass",searchClass);
 											sessionStorage.setItem("NoOfTravellers",searchTravelers);
+											sessionStorage.setItem("roundTripReturnSource",searchDestination);
+  											sessionStorage.setItem("roundTripReturnDestination",searchSource);
+  											//sessionStorage.setItem("departureJourneyDate", searchDepartureDate);
+  											sessionStorage.setItem("returnJourneyDate", searchReturnDate);
+  											
   											//alert(sessionStorage.getItem("TravelClass"));
 											returnResponse = 1;
 								
@@ -226,14 +243,14 @@
 										<div class="form-group">
 											<span class="form-label">Departing</span>
 											<!--<input class="form-control" type="date" required> -->
-											<input type="date" id="departure" class="form-control" required>
+											<input type="date" id="departureDate" class="form-control" required>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<span class="form-label">Returning</span>
 											<!-- <input class="form-control" type="date" required> -->
-											<input type="date" id="return" name="returndate" class="form-control" required>
+											<input type="date" id="returnDate" name="returndate" class="form-control" required>
 										</div>
 									</div>
 								</div>

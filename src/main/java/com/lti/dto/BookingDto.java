@@ -6,38 +6,23 @@ import java.util.List;
 import com.lti.entity.Passenger;
 
 public class BookingDto {
-	
-	private String source;
-	private String destination;
-	private LocalDate journeyDate;
+
+	private String journeyDate;
 	private int noOfPassenger;
 	private double cost;
 	private int userId;
 	private int flightId;
+	private String emailId;
 	
 	private List<Passenger> passengerList;
 
-	public String getSource() {
-		return source;
-	}
-
-	public void setSource(String source) {
-		this.source = source;
-	}
-
-	public String getDestination() {
-		return destination;
-	}
-
-	public void setDestination(String destination) {
-		this.destination = destination;
-	}
-
-	public LocalDate getJourneyDate() {
+	
+	
+	public String getJourneyDate() {
 		return journeyDate;
 	}
 
-	public void setJourneyDate(LocalDate journeyDate) {
+	public void setJourneyDate(String journeyDate) {
 		this.journeyDate = journeyDate;
 	}
 
@@ -79,6 +64,21 @@ public class BookingDto {
 
 	public void setPassengerList(List<Passenger> passengerList) {
 		this.passengerList = passengerList;
+	}
+
+	public String getEmailId() {
+		return emailId;
+	}
+
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+
+	@Override
+	public String toString() {
+		return "BookingDto [cost=" + cost + ", emailId=" + emailId + ", flightId=" + flightId + ", journeyDate="
+				+ journeyDate + ", noOfPassenger=" + noOfPassenger + ", passengerList=" + passengerList + ", userId="
+				+ userId + "]";
 	}
 	
 	
