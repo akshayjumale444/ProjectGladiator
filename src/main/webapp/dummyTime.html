@@ -10,11 +10,11 @@
 		$("#departFrm").submit(function(evt){
 			evt.preventDefault(); 
 			var obj={
-					date : $("#jdate").val()
+					bookingId : $("#bookingId").val()
 			}
 			alert( JSON.stringify(obj));
 			$.ajax({
-				url : "getDate.lti", 
+				url : "fetchTicket.lti", 
 				method : 'POST' ,
 				data : JSON.stringify(obj), 
 				contentType : 'application/json', 
@@ -28,7 +28,7 @@
 </head>
 <body>
 <form id="departFrm">
-	Depart<input type="time" id=jdate><br>
+	Bi<input type="text" id=bookingId><br>
 	<button type="submit" id="btn">Submit</button>
 </form>
 	

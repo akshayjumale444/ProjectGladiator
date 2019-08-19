@@ -12,7 +12,14 @@
 	src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
 	$(function() {
-
+		// Session Management
+		if(sessionStorage.tripType == undefined){
+			alert("Session Over!!!!   Redirecting to Home Page....")
+			//sessionStorage.clear();
+			window.location.href="SearchFlight.html";
+		}
+		//End 
+		
 		$("#searchFlightForm")
 				.submit(
 						function(evt) {
@@ -52,7 +59,7 @@
   											sessionStorage.setItem("oneWaySource",searchSource);
   											sessionStorage.setItem("oneWayDestination",searchDestination);
   											sessionStorage.setItem("departureJourneyDate", searchDepartureDate);
-  											//sessionStorage.setItem("returnJourneyDate", searchReturnDate);
+  											
   											
   											alert(sessionStorage.getItem("TravelClass"));
   											alert(sessionStorage.getItem("departureJourneyDate"));
@@ -72,6 +79,7 @@
 								// Round Trip
 								var departureResponse = 0;
 								var returnResponse = 0;
+								
 								// Source To Destination
 								$.ajax({
 									url : 'searchFlights.lti?source='
@@ -83,13 +91,12 @@
 								method : 'GET',
 								//contentType: 'application/json',
 								success : function(response) {
-									//alert(JSON.stringify(response));
+						
 									
-									//console.log(JSON.stringify(response));
+									console.log(JSON.stringify(response));
 									// SessionStorage
 									
 											// Store
-											//sessionStorage.setItem("tripType","twoway");roundtrip
 											sessionStorage.setItem("tripType","roundtrip");
 											sessionStorage.setItem("returnTripDepartureFlights",JSON.stringify(response));
 											sessionStorage.setItem("TravelClass",searchClass);
@@ -97,14 +104,10 @@
 											sessionStorage.setItem("roundTripDepartureSource",searchSource);
   											sessionStorage.setItem("roundTripDepartureDestination",searchDestination);
   											sessionStorage.setItem("departureJourneyDate", searchDepartureDate);
-  											//sessionStorage.setItem("returnJourneyDate", searchReturnDate);
-  											
-  											//alert(sessionStorage.getItem("TravelClass"));
 											departureResponse = 1;
 									
 									//session end
-								
-									alert(sessionStorage.getItem("returnTripDepartureFlights"));
+						
 									console.log(sessionStorage.getItem("returnTripDepartureFlights"));
 								}
 								});
@@ -121,30 +124,23 @@
 								method : 'GET',
 								//contentType: 'application/json',
 								success : function(response) {
-									//alert(JSON.stringify(response));
-									
-									//console.log(JSON.stringify(response));
+									console.log(JSON.stringify(response));
 									
 									
 									// SessionStorage
 									
 											// Store
-											//sessionStorage.setItem("tripType","twoway");
-											//sessionStorage.setItem("tripType","twoway");roundtrip
 											sessionStorage.setItem("tripType","roundtrip");
 											sessionStorage.setItem("returnTripReturnFlights",JSON.stringify(response));
 											sessionStorage.setItem("TravelClass",searchClass);
 											sessionStorage.setItem("NoOfTravellers",searchTravelers);
 											sessionStorage.setItem("roundTripReturnSource",searchDestination);
   											sessionStorage.setItem("roundTripReturnDestination",searchSource);
-  											//sessionStorage.setItem("departureJourneyDate", searchDepartureDate);
   											sessionStorage.setItem("returnJourneyDate", searchReturnDate);
-  											
-  											//alert(sessionStorage.getItem("TravelClass"));
 											returnResponse = 1;
 								
 									//session end 
-									alert(sessionStorage.getItem("returnTripReturnFlights"));
+								
 									console.log(sessionStorage.getItem("returnTripReturnFlights"));
 								}
 								});
@@ -199,14 +195,10 @@
 										
 										<label for="one-way">
 											<input type="radio" id="one-way" name="flight-type" value="oneway" onclick="returndate.disabled=true"/>
-											<!-- <input type="radio" id="travelJourney" name="flight-type" value="oneway" checked>-->
-											<!-- <input type="radio" id="travelJourney" name="flight-type" value="oneway"> -->
 											<span></span>One way
 										</label>
 										<label for="roundtrip">
 											<input type="radio" id="roundtrip" name="flight-type" value="roundtrip" onclick="returndate.disabled=false"/>
-											<!-- <input type="radio" id="travelJourney" name="flight-type" value="roundtrip">-->
-											<!--<input type="radio" id="travelJourney" name="flight-type" value="twoway"> -->
 											<span></span>Roundtrip
 										</label>
 										 
@@ -270,16 +262,13 @@
 												<option>9</option>
 											</select>
 											<span class="select-arrow"></span>
-											<!--  <input type="number" id="noOFTravelers" class="form-control"> -->
+											
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="form-group">
 											<span class="form-label">Travel class</span>
-											<!--<select class="form-control">
-												<option>Economy class</option>
-												<option>Business class</option>
-											</select> -->
+											
 											<Select id="tavelClass" class="form-control">
 												<option value="economy">Economy class</option>
 												<option value="business">Business class</option>
@@ -290,7 +279,7 @@
 								</div>
 								<div class="form-btn">
 									<button class="submit-btn" type="submit">Show flights</button>
-									<!--<button type="submit" class="submit-btn">Show flights</button>-->
+									
 								</div>
 							</form>
 						</div>

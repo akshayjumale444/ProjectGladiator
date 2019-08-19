@@ -51,18 +51,27 @@
 <script>
 	$(function() {
 		//SessionStorage
+		
+		// Session Management
+		if(sessionStorage.tripType == undefined){
+			alert("Session Over!!!!   Redirecting to Home Page....")
+			sessionStorage.clear();
+			window.location.href="SearchFlight.html";
+		}
+		// End
+		
 		if (typeof (Storage) !== "undefined") {
 			// Store
-			alert(sessionStorage.getItem("tripType"));
+			//alert(sessionStorage.getItem("tripType"));
 			if(sessionStorage.getItem("tripType")=="oneway")
 				{
-					alert(sessionStorage.getItem("oneWayTripFlights"));
+					//alert(sessionStorage.getItem("oneWayTripFlights"));
 					//var stringResponse = sessionStorage.getItem("oneWayTripFlights");
 					var response = JSON.parse(sessionStorage.getItem("oneWayTripFlights"));
 					var travelClass = sessionStorage.getItem("TravelClass");
 					//var searchResultsDivId = "oneWayResultFlightsDiv";
 					//var idCounter = 0;
-					alert(response);
+					//alert(response);
 					//$.ajax({
 						response.forEach(function (flights) {
 						//$.each(response, function(index, flights){

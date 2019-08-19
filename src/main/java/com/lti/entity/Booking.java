@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,6 +44,9 @@ public class Booking {
 	@Column(name="TICKET_MAILING_ID")
 	private String ticketMailingId;
 	
+	@Column(name="TRAVEL_CLASS")
+	private String travelClass;
+	
 	@OneToOne
 	@JoinColumn(name="USER_ID_FK")
 	private User user;
@@ -51,8 +55,11 @@ public class Booking {
 	@JoinColumn(name="FLIGHT_ID_FK")
 	private Flight flight;
 	
-	@OneToMany(mappedBy="booking")
+	@OneToMany(mappedBy="booking", cascade=CascadeType.ALL)
 	private Set<Passenger> passengerList;
+	
+	@OneToOne(mappedBy="booking", cascade=CascadeType.ALL)
+	private Payment paymentDetail;
 
 	public int getBookingId() {
 		return bookingId;
@@ -120,6 +127,16 @@ public class Booking {
 	public void setTicketMailingId(String ticketMailingId) {
 		this.ticketMailingId = ticketMailingId;
 	}
+	
+	
+
+	public String getTravelClass() {
+		return travelClass;
+	}
+
+	public void setTravelClass(String travelClass) {
+		this.travelClass = travelClass;
+	}
 
 	public User getUser() {
 		return user;
@@ -144,8 +161,13 @@ public class Booking {
 	public void setPassengerList(Set<Passenger> passengerList) {
 		this.passengerList = passengerList;
 	}
-	
-	
-	
 
+	public Payment getPaymentDetail() {
+		return paymentDetail;
+	}
+
+	public void setPaymentDetail(Payment paymentDetail) {
+		this.paymentDetail = paymentDetail;
+	}
+	
 }

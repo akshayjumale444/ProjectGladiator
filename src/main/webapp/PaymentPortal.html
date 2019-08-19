@@ -8,7 +8,15 @@
 	src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
 	$(function() {
-
+		
+		// Session Management
+		if(sessionStorage.tripType == undefined){
+			alert("Session Over!!!!   Redirecting to Home Page....")
+			sessionStorage.clear();
+			window.location.href="SearchFlight.html";
+		}
+		//End 
+		
 		$("#paymentForm").submit(function(evt) {
 			evt.preventDefault();
 			var amount = sessionStorage.getItem("totalCost");
@@ -20,7 +28,9 @@
 <body>
 	<form id="paymentForm">
 		Proceed for Payment
-		<button  type="submit">Pay Now</button>
+		<button  type="submit">Net Banking</button>
+		<br><br><br>
+		<a href = "TicketGeneration.html"><button  type="button">Other</button></a>
 	</form>
 	
 </body>

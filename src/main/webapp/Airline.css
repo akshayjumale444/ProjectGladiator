@@ -578,3 +578,199 @@ input.error {
 .progressbar li.active+ li:after{
 	background-color: #ef2e1f;
 }
+
+.thank p{
+font-size: 20px;
+text-align: center;
+margin-top: 0px;
+
+
+}
+
+
+
+.ticket{
+border-color: #f18053;
+border-style: groove;
+border-radius: 5px;
+position: absolute;
+top: 35%;
+left: 50%;
+transform: translate(-50%,-50%);
+display: flex;
+width: 600px;
+
+}
+
+.ticket .qr_code{
+width: 30%;
+background: #252525;
+padding: 20px;
+border-top-left-radius: 5px;
+border-bottom-left-radius: 5px;
+    position: relative;
+}
+
+.ticket .qr_code img{
+display: block;
+width: 115px;
+
+}
+
+.ticket .ticketcontent{
+width: 70%;
+background: #fff;
+padding: 20px;
+border-top-right-radius: 5px;
+border-bottom-right-radius: 5px;
+}
+
+.ticket .ticketcontent .ticketlocation{
+display: flex;
+justify-content: space-between;
+text-align: center;
+    margin-bottom: 20px;
+}
+
+.ticket .ticketcontent .ticketlocation h1{
+margin-bottom: 5px;
+color: #252525;
+
+}
+
+.ticket .ticketcontent .ticketlocation p,
+.ticket .ticketcontent .info p{
+font-size: 13px;
+color: #cecace;
+font-
+
+}
+.ticket .ticketcontent .info{
+display: flex;
+justify-content: space-between;
+}
+
+.ticket .ticketcontent .info h4{
+margin-bottom: 10px;
+text-transform: uppercase;
+font-size: 12px;
+}
+
+.ticket .qr_code:before,
+.ticket .qr_code:after{
+content: "";
+position: absolute;
+right: -10px;
+width: 50px;
+height: 50px;
+background: #fff;
+border-radius: 50%;
+}
+
+.ticket .qr_code:before{
+top: -32px;
+}
+
+.ticket .qr_code:after{
+bottom: -32px;
+}
+
+
+
+
+
+.ticket2{
+border-color: #f18053;
+border-style: groove;
+border-radius: 5px;
+position: absolute;
+top: 70%;
+left: 50%;
+transform: translate(-50%,-50%);
+display: flex;
+width: 600px;
+
+}
+
+.ticket2 .qr_code{
+width: 30%;
+background: #252525;
+padding: 20px;
+border-top-left-radius: 5px;
+border-bottom-left-radius: 5px;
+    position: relative;
+}
+
+.ticket2 .qr_code img{
+display: block;
+width: 115px;
+
+}
+
+.ticket2 .ticketcontent{
+width: 70%;
+background: #fff;
+padding: 20px;
+border-top-right-radius: 5px;
+border-bottom-right-radius: 5px;
+}
+
+.ticket2 .ticketcontent .ticketlocation{
+display: flex;
+justify-content: space-between;
+text-align: center;
+    margin-bottom: 20px;
+}
+
+.ticket2 .ticketcontent .ticketlocation h1{
+margin-bottom: 5px;
+color: #252525;
+
+}
+
+.ticket2 .ticketcontent .ticketlocation p,
+.ticket2 .ticketcontent .info p{
+font-size: 13px;
+color: #cecace;
+font-
+
+}
+.ticket2 .ticketcontent .info{
+display: flex;
+justify-content: space-between;
+}
+
+.ticket2 .ticketcontent .info h4{
+margin-bottom: 10px;
+text-transform: uppercase;
+font-size: 12px;
+}
+
+.ticket2 .qr_code:before,
+.ticket2 .qr_code:after{
+content: "";
+position: absolute;
+right: -10px;
+width: 50px;
+height: 50px;
+background: #fff;
+border-radius: 50%;
+}
+
+.ticket2 .qr_code:before{
+top: -32px;
+}
+
+.ticket2 .qr_code:after{
+bottom: -32px;
+}
+
+#printbutton{
+border-style: groove;
+position: relative;
+margin-top: 480px;
+margin-left: 50%;
+border-radius: 5px;
+background: #ef2e1f;
+color: #fff;
+}

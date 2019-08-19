@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lti.dto.BookingDto;
+import com.lti.dto.BookingId;
 import com.lti.dto.DataTransfer;
 import com.lti.dto.Login;
 import com.lti.dto.LoginStatus;
 import com.lti.dto.Status;
+import com.lti.dto.TicketDto;
 import com.lti.entity.Admin;
 import com.lti.entity.Flight;
 import com.lti.entity.User;
@@ -85,7 +87,6 @@ public class AirlineController {
 	public Status addBooking( BookingDto bookingDto) {
 		
 		int bookingId=airlineService.addBooking(bookingDto);
-		//System.out.println("BookingId:"+bookingId);
 		status.setGeneratedId(bookingId);
 		status.setMessage("Ticket Booking in progress!");
 		return status;
@@ -93,9 +94,17 @@ public class AirlineController {
 	}
 	
 	@PostMapping("/updateBooking.lti")
-	public void updateBooking(@RequestBody int bookingId) {
+	public void updateBooking(@RequestBody BookingId bookingId) {
 		
-		airlineService.updateBooking(bookingId);
+		airlineService.updateBooking(Integer.parseInt(bookingId.getBookingId()));
+		System.out.println("Confirmed");
+	}
+	
+	//fetching Ticket controller
+	@PostMapping("/fetchTicket.lti")
+	public TicketDto fetchTicket(@RequestBody  BookingId bookingId) {
+		TicketDto fetchedTicket=airlineService.fetchTicket(Integer.parseInt(bookingId.getBookingId()));
+		return fetchedTicket;
 	}
 	
 	

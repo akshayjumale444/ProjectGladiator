@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.lti.dto.TicketDto;
 import com.lti.entity.Booking;
 import com.lti.entity.Flight;
 import com.lti.entity.Passenger;
@@ -17,4 +18,6 @@ public interface AirlineOperationsDao {
 	public void addPassenger(Passenger passenger);
 	public List<Passenger> fetchPassenger(int bookingId);
 	public Flight fetchedFlight(Booking booking);
+	public TicketDto fetchTicket(int bookingId);
+	//public void fetchTicket(Booking booking);
 }

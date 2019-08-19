@@ -158,12 +158,12 @@ public class Flight{
 		this.businessSeats = businessSeats;
 	}
 
-	/*@Override
+	@Override
 	public String toString() {
 		return "Flight [flightId=" + flightId + ", source=" + source + ", destination=" + destination + ", departure="
-				+ departure + ", arrival=" + arrival + ", duration=" + duration + ", economyClassCost="
-				+ economyClassCost + ", businessClassCost=" + businessClassCost + ", noOfSeats=" + noOfSeats
-				+ ", economySeats=" + economySeats + ", businessSeats=" + businessSeats + ", admin=" + admin + "]";
-	}*/
+				+ departure + ", arrival=" + arrival + "]";
+	}
+
+	
 		
 }

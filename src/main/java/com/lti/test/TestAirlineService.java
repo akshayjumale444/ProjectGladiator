@@ -1,6 +1,5 @@
 package com.lti.test;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 import com.lti.dto.BookingDto;
-import com.lti.entity.Booking;
+import com.lti.dto.TicketDto;
 import com.lti.entity.Passenger;
 import com.lti.entity.User;
 import com.lti.service.AirlineService;
@@ -105,8 +104,15 @@ public class TestAirlineService {
 	@Test
 	public void testUpdateBooking() {
 		
-		dao.updateBooking(161);
+		dao.updateBooking(801);
 		
+	}
+	
+	@Test
+	public void testFetchTicket() {
+		TicketDto ticket=dao.fetchTicket(801);
+		System.out.println(ticket.toString());
+		//System.out.println(ticket.getFlightId());
 	}
 	
 	/*@Test

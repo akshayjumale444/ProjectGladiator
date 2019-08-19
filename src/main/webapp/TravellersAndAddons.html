@@ -12,6 +12,15 @@
 	<script>
 	
 	$(function() {
+		
+		// Session Management
+		if(sessionStorage.tripType == undefined){
+			alert("Session Over!!!!   Redirecting to Home Page....")
+			sessionStorage.clear();
+			window.location.href="SearchFlight.html";
+		}
+		//End 
+		
 		var noOfTrvellers = sessionStorage.getItem("NoOfTravellers");
 		//var noOfTrvellers = 3;
 		for( i = 0; i<noOfTrvellers; i++){
@@ -163,6 +172,8 @@
 							success : function(response) {	
 								alert(JSON.stringify(response));
 								singleTripResponse = 1;
+								localStorage.setItem("oneWayBookingId", response.generatedId );
+								localStorage.setItem("tripType", sessionStorage.getItem("tripType") );
 							}
 						});
 						
@@ -238,6 +249,8 @@
 							success : function(response) {	
 								alert(JSON.stringify(response));
 								departureResponse = 1;
+								localStorage.setItem("roundTripDepartureBookingId", response.generatedId );
+								localStorage.setItem("tripType", sessionStorage.getItem("tripType") );
 							}
 						});
 						
@@ -289,6 +302,8 @@
 							success : function(response) {	
 								alert(JSON.stringify(response));
 								returnResponse = 1;
+								localStorage.setItem("roundTripReturnBookingId", response.generatedId );
+								localStorage.setItem("tripType", sessionStorage.getItem("tripType") );
 							}
 						});
 						

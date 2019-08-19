@@ -11,6 +11,14 @@
 <script>
 $(function(){
 	
+	// Session Management
+	if(sessionStorage.tripType == undefined){
+		alert("Session Over!!!!   Redirecting to Home Page....")
+		sessionStorage.clear();
+		window.location.href="SearchFlight.html";
+	}
+	//End 
+	
 	$("#uemail_error_message").hide();
 	$("#upassword_error_message").hide();
 	

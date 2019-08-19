@@ -1,10 +1,330 @@
-<!DOCTYPE html>
+
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+	<title>Musafir Airlines</title>
+
+	<link type="text/css" rel="stylesheet" href="bootstrap.min.css" />
+
+	<link type="text/css" rel="stylesheet" href="Airline.css" />
+
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script>
+		$(function(){
+			
+			// Session Management
+			if(sessionStorage.totalCost == undefined){
+				alert("Session Over!!!!   Redirecting to Home Page....")
+				sessionStorage.clear();
+				window.location.href="SearchFlight.html";
+			}
+			//End 
+			
+		//var tripType = "roundtrip";
+		sessionStorage.setItem("tripType", localStorage.getItem("tripType") );
+		localStorage.removeItem("tripType");
+		var tripType = sessionStorage.getItem("tripType");
+
+		if(tripType == "oneway"){
+			$("#return").hide();
+			
+			//var oneWayBookingId = 801;
+			//localStorage.setItem("oneWayBookingId", response.bookingId );
+			sessionStorage.setItem("oneWayBookingId", localStorage.getItem("oneWayBookingId") );
+			localStorage.removeItem("oneWayBookingId");
+			//sessionStorage.setItem("oneWayBookingId",);
+			var oneWayBookingId = sessionStorage.getItem("oneWayBookingId");
+			var obj={
+					bookingId : oneWayBookingId
+			}
+			
+			
+			//---------------------------------AJAX CALL TO CONFIRM ------------------------------
+			$.ajax({
+									
+									url : 'updateBooking.lti',
+									method : 'POST',
+									data : JSON.stringify(obj),
+									contentType: 'application/json',
+									success : function() {}
+			});
+			
+			//-------------------------------------END-----------------------------------------------------------
+			
+			
+			$.ajax({
+									
+									url : 'fetchTicket.lti',
+									method : 'POST',
+									data : JSON.stringify(obj),
+									contentType: 'application/json',
+									success : function(response) {	
+										alert(JSON.stringify(response));
+										$("#departureSource").append(response.source);
+										$("#departureDestination").append(response.destination);
+										$("#departureSourceDateTime").append(response.departureTime);
+										$("#departureDestinationDateTime").append(response.arrivalTime);
+										$("#departureSourceDateTime").append(" "+response.journeyDate);
+										$("#departureDestinationDateTime").append(" "+response.journeyDate);
+										$("#departureFlightID").append(response.flightId);
+										$("#departureBookingID").append(response.bookingId);
+										$("#departureClass").append(response.travelClass);
+										
+										 var passangerName = response.passengerName;
+										 /*
+										passangerName.forEach(function (names) {
+											$("#").append(names);
+										}
+										*/
+										
+										//for i in range(len(passangerName)){
+											$("#departurePassangerName").append(passangerName);
+										//}
+    										
+
+									}
+			});
+		}
+		else{
+
+			// Departure Flight
+			//var roundTripDepartureBookingId = 742;
+			sessionStorage.setItem("roundTripDepartureBookingId", localStorage.getItem("roundTripDepartureBookingId") );
+			localStorage.removeItem("roundTripDepartureBookingId");
+			var roundTripDepartureBookingId = sessionStorage.getItem("roundTripDepartureBookingId");
+			var obj={
+					bookingId : roundTripDepartureBookingId
+			}
+			
+			
+			//---------------------------------AJAX CALL TO CONFIRM ------------------------------
+			$.ajax({
+									
+									url : 'updateBooking.lti',
+									method : 'POST',
+									data : JSON.stringify(obj),
+									contentType: 'application/json',
+									success : function() {}
+			});
+			
+			//-------------------------------------END-----------------------------------------------------------
+			
+			$.ajax({
+									
+									url : 'fetchTicket.lti',
+									method : 'POST',
+									data : JSON.stringify(obj),
+									contentType: 'application/json',
+									success : function(response) {	
+										alert(JSON.stringify(response));
+										
+										$("#departureSource").append(response.source);
+										$("#departureDestination").append(response.destination);
+										$("#departureSourceDateTime").append(response.departureTime);
+										$("#departureDestinationDateTime").append(response.arrivalTime);
+										$("#departureSourceDateTime").append(" "+response.journeyDate);
+										$("#departureDestinationDateTime").append(" "+response.journeyDate);
+										$("#departureFlightID").append(response.flightId);
+										$("#departureBookingID").append(response.bookingId);
+										$("#departureClass").append(response.travelClass);
+										var passangerName = response.passengerName;
+										/*
+										passangerName.forEach(function (names) {
+											$("#").append(names);
+										}
+										*/
+
+										//for i in range(len(passangerName)){
+											$("#departurePassangerName").append(passangerName);
+										//} */
+										
+									}
+			});
+
+			// Return Flight
+			//var roundTripReturnBookingId = 745;
+			sessionStorage.setItem("roundTripReturnBookingId", localStorage.getItem("roundTripReturnBookingId") );
+			localStorage.removeItem("roundTripReturnBookingId");
+			var roundTripReturnBookingId = sessionStorage.getItem("roundTripReturnBookingId");
+			var obj={
+					bookingId : roundTripReturnBookingId
+			}
+			
+			
+			//---------------------------------AJAX CALL TO CONFIRM ------------------------------
+			$.ajax({
+									
+									url : 'updateBooking.lti',
+									method : 'POST',
+									data : JSON.stringify(obj),
+									contentType: 'application/json',
+									success : function() {}
+			});
+			
+			//-------------------------------------END-----------------------------------------------------------
+			
+			$.ajax({
+									
+									url : 'fetchTicket.lti',
+									method : 'POST',
+									data : JSON.stringify(obj),
+									contentType: 'application/json',
+									success : function(response) {	
+										alert(JSON.stringify(response));
+										
+										$("#returnSource").append(response.source);
+										$("#returnDestination").append(response.destination);
+										$("#returnSourceDateTime").append(response.departureTime);
+										$("#returnDestinationDateTime").append(response.arrivalTime);
+										$("#returnSourceDateTime").append(" "+response.journeyDate);
+										$("#returnDestinationDateTime").append(" "+response.journeyDate);
+										$("#returnFlightID").append(response.flightId);
+										$("#returnBookingID").append(response.bookingId);
+										$("#returnClass").append(response.travelClass);
+										var passangerName = response.passengerName;
+										/*
+										passangerName.forEach(function (names) {
+											$("#").append(names);
+										}
+										*/
+
+										//for i in range(len(passangerName)){
+											$("#returnPassangerName").append(passangerName);
+										//} */
+										
+									}
+			});
+
+
+		}
+
+
+		// Logout 
+		$("#logout").click(function(evt){
+			evt.preventDefault();
+			sessionStorage.clear();
+			window.location.href="SearchFlight.html";
+		});
+		
+	});
+
+	// Print Ticket
+	function myFunction() {
+		$("#printbutton").hide();
+  		window.print();
+  		$("#printbutton").show();
+	}
+
+
+		
+	</script>
+	
 </head>
 <body>
-<h1>Ticket booked!!!!!!!!!!</h1>
+	<div class="main">
+		<div class="logo">
+			<img src="Logo.png">
+	    </div>  
+	    <ul>
+			<li><a id="logout" >Log out</a></li>
+  		</ul>
+	</div>
+	<br/>
+	<div class="thank">
+		<p> Thankyou for choosing Musafir Airlines. Here's your ticket.</p>
+	</div>
+    
+        <!--Departure-->
+		<div class="ticket" id="departure">
+			<div class="qr_code">
+				<img src="QR_Code.png" alt="qr_code">
+			</div>
+			<div class="ticketcontent">
+				<div class="ticketlocation">
+					<div class="item">
+						<h1 id="departureSource"></h1>
+						<p id="departureSourceDateTime"></p>
+					</div>
+					<div class="path">
+						to
+					</div>
+					<div class="item">
+						<h1 id="departureDestination"></h1>
+						<p id="departureDestinationDateTime"></p>
+					</div>
+				</div>
+
+			    <div class="info">
+			    	<div class="item">
+			    		<h4>Passenger</h4>
+			    		<p id="departurePassangerName"></p>
+			    	</div>
+			    	<div class="item">
+			    		<h4>flight</h4>
+			    		<p id="departureFlightID"></p>
+			    	</div>
+			    	<div class="item">
+			    		<h4>booking-id</h4>
+			    		<p id="departureBookingID"></p>
+			    	</div>
+			    	<div class="item">
+			    		<h4>terminal</h4>
+			    		<p>P4</p>
+			    	</div>
+			    	<div class="item">
+			    		<h4>class</h4>
+			    		<p id="departureClass"></p>
+			    	</div>
+			    </div>
+			</div>
+		</div>
+    
+	    <!--Return-->
+	    <div class="ticket2" id="return">
+			<div class="qr_code">
+				<img src="QR_Code.png" alt="qr_code">
+			</div>
+			<div class="ticketcontent">
+				<div class="ticketlocation">
+					<div class="item">
+						<h1 id="returnSource"></h1>
+						<p id="returnSourceDateTime"></p>
+					</div>
+					<div class="path">
+						to
+					</div>
+					<div class="item">
+						<h1 id="returnDestination"></h1>
+						<p id="returnDestinationDateTime"></p>
+					</div>
+				</div>
+
+			    <div class="info">
+			    	<div class="item">
+			    		<h4>Passenger</h4>
+			    		<p id="returnPassangerName"></p>
+			    	</div>
+			    	<div class="item">
+			    		<h4>flight</h4>
+			    		<p id="returnFlightID"></p>
+			    	</div>
+			    	<div class="item">
+			    		<h4>booking-id</h4>
+			    		<p id="returnBookingID"></p>
+			    	</div>
+			    	<div class="item">
+			    		<h4>terminal</h4>
+			    		<p>P4</p>
+			    	</div>
+			    	<div class="item">
+			    		<h4>class</h4>
+			    		<p id="returnClass"></p>
+			    	</div>
+			    </div>
+			</div>
+		</div>
+
+		<button id="printbutton" onclick="myFunction()">Print this page</button>
+	
 </body>
 </html>

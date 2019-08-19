@@ -12,9 +12,11 @@ import org.springframework.stereotype.Service;
 import com.lti.dao.AirlineOperationsDao;
 import com.lti.dao.GenericDao;
 import com.lti.dto.BookingDto;
+import com.lti.dto.TicketDto;
 import com.lti.entity.Booking;
 import com.lti.entity.Flight;
 import com.lti.entity.Passenger;
+import com.lti.entity.Payment;
 import com.lti.entity.User;
 @Service
 public class AirlineServiceImpl implements AirlineService{
@@ -63,6 +65,7 @@ public class AirlineServiceImpl implements AirlineService{
 		booking.setCost(bookingDto.getCost());
 		booking.setTicketMailingId(bookingDto.getEmailId());
 		booking.setBookingDate(LocalDate.now());
+		booking.setTravelClass(bookingDto.getTravelClass());
 		
 		user=gd.fetchById(User.class, bookingDto.getUserId());
 		flight=gd.fetchById(Flight.class, bookingDto.getFlightId());
@@ -107,10 +110,44 @@ public class AirlineServiceImpl implements AirlineService{
 		int confirmedSeat=booking.getNoOfPassengers();
 		
 		Flight flight=airlineOperationsDao.fetchedFlight(booking);
-		//flight.set
+		System.out.println("FetchedFlightId"+flight.getFlightId());
 		
+		if(booking.getTravelClass().equalsIgnoreCase("economy")) {
+			flight.setEconomySeats(flight.getEconomySeats()-confirmedSeat);
+		}
+		else {
+			flight.setBusinessSeats(flight.getBusinessSeats()-confirmedSeat);
+		}
+		flight=(Flight)gd.save(flight);
+		System.out.println("Details for flight with flightId"+flight.getFlightId()+" updated");
+		
+		//updating payment_detail table
+		Payment payment=new Payment();
+		payment.setAmountPaid(booking.getCost());
+		payment.setPaymentMode("Net Banking");
+		payment.setBooking(booking);
+		payment=(Payment)gd.save(payment);
+		System.out.println("PaymentId"+payment.getPaymentId());
 		
 	}
+
+	/*public void fetchTicket(int bookingId) {
+		TicketDto fetchedTicket=new TicketDto();
+		
+		Booking booking=gd.fetchById(Booking.class, bookingId);
+		airlineOperationsDao.fetchTicket(bookingId);
+	}*/
+	public TicketDto fetchTicket(int bookingId) {
+		TicketDto fetchedTicket=new TicketDto();
+		System.out.println("Reached1");
+		fetchedTicket=airlineOperationsDao.fetchTicket(bookingId);
+		return fetchedTicket;
+		//return airlineOperationsDao.fetchTicket(bookingId);
+		
+	}
+	
+	
+	
 	
 	/*@Transactional
 	public int addPassenger(Passenger passenger) {

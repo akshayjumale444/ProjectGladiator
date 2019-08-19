@@ -39,6 +39,16 @@
 $(function(){
 	//alert(sessionStorage.getItem("oneWaySelectedFlightId"));
 	
+	
+	// Session Management
+	if(sessionStorage.tripType == undefined){
+		alert("Session Over!!!!   Redirecting to Home Page....")
+		sessionStorage.clear();
+		window.location.href="SearchFlight.html";
+	}
+	//End 
+	
+	
 	if(sessionStorage.getItem("tripType")=="oneway"){
 		$("#selectedFlightDetails").append(sessionStorage.getItem("oneWaySelectedFlightId"));
 		alert(sessionStorage.getItem("oneWaySelectedFlightId"));
