@@ -84,7 +84,7 @@ $(function(){
 				contentType : 'application/json',
 				success : function(response){
 					var responseResult=JSON.stringify(response);
-					alert(responseResult);
+					//alert(responseResult);
 					if(responseResult=="false")
 						window.location.assign("AdminPortal.html");
 					else{
@@ -105,6 +105,12 @@ $(function(){
 
 </head>
 <body>
+
+	<div class="main">
+		<div class="logo">
+			<a href="SearchFlight.html"><img src="Logo.png" ></a>
+	    </div>
+	</div>
 
 	<div class="loginbox">
 		<h1>Admin Login</h1>

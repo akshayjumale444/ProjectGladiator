@@ -46,11 +46,6 @@ public class AirlineController {
 		LoginStatus loginStatus=loginService.validateUser(login.getEmail(), login.getPassword());
 		return loginStatus;
 		
-		//boolean result=loginService.validateUser(login.getEmail(), login.getPassword());
-		//return result;
-		//true=>Either Username or password is incorrect
-		//false=>is a valid user
-		
 	}
 
 	@PostMapping("/validateAdmin.lti")
@@ -149,12 +144,12 @@ public class AirlineController {
 		return flightList;
 	}
 
-	/*@PostMapping("/fetchFlightById")
+	@PostMapping("/fetchFlightById")
 	public Flight fetchFlight(@RequestBody Flight fId){
 		Flight fetchedFlight=adminService.fetchFlightById(fId.getFlightId());
 		return fetchedFlight;
 
-	}*/
+	}
 
 	@PostMapping("/deleteFlight.lti")
 	public Status deleteFlight(@RequestBody Flight fId) {

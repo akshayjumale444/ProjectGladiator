@@ -53,11 +53,12 @@
 		//SessionStorage
 		
 		// Session Management
-		if(sessionStorage.tripType == undefined){
-			alert("Session Over!!!!   Redirecting to Home Page....")
+		
+		/* if(sessionStorage.tripType == undefined){
+			console.log("Session Over!!!!   Redirecting to Home Page....")
 			sessionStorage.clear();
 			window.location.href="SearchFlight.html";
-		}
+		} */
 		// End
 		
 		if (typeof (Storage) !== "undefined") {
@@ -66,19 +67,14 @@
 			if(sessionStorage.getItem("tripType")=="oneway")
 				{
 					//alert(sessionStorage.getItem("oneWayTripFlights"));
-					//var stringResponse = sessionStorage.getItem("oneWayTripFlights");
+					
 					var response = JSON.parse(sessionStorage.getItem("oneWayTripFlights"));
 					var travelClass = sessionStorage.getItem("TravelClass");
-					//var searchResultsDivId = "oneWayResultFlightsDiv";
-					//var idCounter = 0;
-					//alert(response);
-					//$.ajax({
+					
 						response.forEach(function (flights) {
-						//$.each(response, function(index, flights){
-							//for(var flights of response){
+						
 							console.log(flights);
-							//idCounter = idCounter + 1;
-							//$("#searchResults").append("<div id ='"+(searchResultsDivId+idCounter)+
+							
 							$("#searchResults").append("<div id ='oneWayResultFlightsDiv' class='oneWayResultFlightsDiv'> Flight Id.: "+flights.flightId
 									+"<br> Source: "+flights.source
 									+" Departure Time: "+flights.departure
@@ -89,11 +85,9 @@
 									+" Business Class Cost: Rs. "+flights.businessClassCost
 									+"</div> <br>");
 							
-									//+"<br>Economy Class Cost: "+flights.economyClassCost
-									//+" Business Class Cost: "+flights.businessClassCost
-									//+"<br><br>");
+									
 							var oneWaySelectedFlightButton = $("<button />");
-							//$("#searchResults").append(btn);		
+							
 							$("#searchResults").append(oneWaySelectedFlightButton);
 							oneWaySelectedFlightButton.attr("class", "selectedFlight");
 							oneWaySelectedFlightButton.attr("selectedFlightId", flights.flightId);
@@ -110,15 +104,15 @@
 						 $("#searchResults").on("click", ".selectedFlight", function() {
 							 
 							 var oneWaySelectedId = $(this).attr("SelectedFlightId");
-							 alert("Selected Flight Id.: "+oneWaySelectedId);
+							 console.log("Selected Flight Id.: "+oneWaySelectedId);
 							 sessionStorage.setItem("oneWaySelectedFlightId",oneWaySelectedId);
 							 window.location.href="ReviewSelection.html";
 						 });
 						
 				}
 			else{
-				alert(sessionStorage.getItem("returnTripDepartureFlights"));
-				alert(sessionStorage.getItem("returnTripReturnFlights"));
+				//alert(sessionStorage.getItem("returnTripDepartureFlights"));
+				//alert(sessionStorage.getItem("returnTripReturnFlights"));
 				
 				var departureResponse = JSON.parse(sessionStorage.getItem("returnTripDepartureFlights"));
 				console.log(departureResponse);
@@ -195,7 +189,7 @@
 					 
 					 var twoWayDepartureFlightID = $("input[name='twoWayDepartureFlights']:checked").val();
 					 var twoWayReturnFlightID = $("input[name='twoWayReturnFlights']:checked").val();
-					 alert("Selected Flights Id.:Departure: "+twoWayDepartureFlightID+"   Return: "+twoWayReturnFlightID);
+					 //alert("Selected Flights Id.:Departure: "+twoWayDepartureFlightID+"   Return: "+twoWayReturnFlightID);
 					 sessionStorage.setItem("twoWayDepartureSelectedFlightId",twoWayDepartureFlightID);
 					 sessionStorage.setItem("twoWayReturnSelectedFlightId",twoWayReturnFlightID);
 					 window.location.href="ReviewSelection.html";
@@ -216,10 +210,6 @@
 		<div class="logo">
 			<a href="SearchFlight.html"><img src="Logo.png" ></a>
 	    </div>
-		<ul>
-			<li><a href="UserLoginPage.html">Log in</a></li>
-            <!--  <li><a href="#">Sign up</li> -->
-		</ul>
 	</div>
 	<div class="container2">
 		<ul class="progressbar">

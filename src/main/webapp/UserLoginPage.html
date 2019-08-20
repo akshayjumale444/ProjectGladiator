@@ -91,9 +91,9 @@ $(function(){
 				data : JSON.stringify(obj),
 				contentType : 'application/json',
 				success : function(response){
-					alert(JSON.stringify(response));
-					alert(response.result);
-					alert(response.fetchedUserId);
+					//alert(JSON.stringify(response));
+					//alert(response.result);
+					//alert(response.fetchedUserId);
 					sessionStorage.setItem("userId",response.fetchedUserId);
 					var responseResult=JSON.stringify(response.result);
 					if(responseResult=="true")
@@ -116,7 +116,11 @@ $(function(){
 
 </head>
 <body>
-
+	<div class="main">
+		<div class="logo">
+			<a href="SearchFlight.html"><img src="Logo.png" ></a>
+	    </div>
+	</div>
 	<div class="loginbox">
 		<h1>Login</h1>
 		<br>

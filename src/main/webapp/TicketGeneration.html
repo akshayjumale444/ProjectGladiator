@@ -32,7 +32,6 @@
 			//localStorage.setItem("oneWayBookingId", response.bookingId );
 			sessionStorage.setItem("oneWayBookingId", localStorage.getItem("oneWayBookingId") );
 			localStorage.removeItem("oneWayBookingId");
-			//sessionStorage.setItem("oneWayBookingId",);
 			var oneWayBookingId = sessionStorage.getItem("oneWayBookingId");
 			var obj={
 					bookingId : oneWayBookingId
@@ -59,7 +58,7 @@
 									data : JSON.stringify(obj),
 									contentType: 'application/json',
 									success : function(response) {	
-										alert(JSON.stringify(response));
+										//alert(JSON.stringify(response));
 										$("#departureSource").append(response.source);
 										$("#departureDestination").append(response.destination);
 										$("#departureSourceDateTime").append(response.departureTime);
@@ -71,12 +70,6 @@
 										$("#departureClass").append(response.travelClass);
 										
 										 var passangerName = response.passengerName;
-										 /*
-										passangerName.forEach(function (names) {
-											$("#").append(names);
-										}
-										*/
-										
 										//for i in range(len(passangerName)){
 											$("#departurePassangerName").append(passangerName);
 										//}
@@ -116,7 +109,7 @@
 									data : JSON.stringify(obj),
 									contentType: 'application/json',
 									success : function(response) {	
-										alert(JSON.stringify(response));
+										//alert(JSON.stringify(response));
 										
 										$("#departureSource").append(response.source);
 										$("#departureDestination").append(response.destination);
@@ -128,11 +121,7 @@
 										$("#departureBookingID").append(response.bookingId);
 										$("#departureClass").append(response.travelClass);
 										var passangerName = response.passengerName;
-										/*
-										passangerName.forEach(function (names) {
-											$("#").append(names);
-										}
-										*/
+										
 
 										//for i in range(len(passangerName)){
 											$("#departurePassangerName").append(passangerName);
@@ -170,7 +159,7 @@
 									data : JSON.stringify(obj),
 									contentType: 'application/json',
 									success : function(response) {	
-										alert(JSON.stringify(response));
+										//alert(JSON.stringify(response));
 										
 										$("#returnSource").append(response.source);
 										$("#returnDestination").append(response.destination);
@@ -182,11 +171,7 @@
 										$("#returnBookingID").append(response.bookingId);
 										$("#returnClass").append(response.travelClass);
 										var passangerName = response.passengerName;
-										/*
-										passangerName.forEach(function (names) {
-											$("#").append(names);
-										}
-										*/
+										
 
 										//for i in range(len(passangerName)){
 											$("#returnPassangerName").append(passangerName);
@@ -231,7 +216,7 @@
 	</div>
 	<br/>
 	<div class="thank">
-		<p> Thankyou for choosing Musafir Airlines. Here's your ticket.</p>
+		<p> Thank You for choosing Musafir Airlines. Here's your ticket.</p>
 	</div>
     
         <!--Departure-->

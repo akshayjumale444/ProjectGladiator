@@ -13,11 +13,11 @@
 <script>
 	$(function() {
 		// Session Management
-		if(sessionStorage.tripType == undefined){
+		/*if(sessionStorage.tripType == undefined){
 			alert("Session Over!!!!   Redirecting to Home Page....")
 			//sessionStorage.clear();
 			window.location.href="SearchFlight.html";
-		}
+		}*/
 		//End 
 		
 		$("#searchFlightForm")
@@ -47,7 +47,7 @@
 									method : 'GET',
 									//contentType: 'application/json',
 									success : function(response) {	
-										alert(JSON.stringify(response));
+										console.log(JSON.stringify(response));
 										
 										// SessionStorage
 										
@@ -61,8 +61,8 @@
   											sessionStorage.setItem("departureJourneyDate", searchDepartureDate);
   											
   											
-  											alert(sessionStorage.getItem("TravelClass"));
-  											alert(sessionStorage.getItem("departureJourneyDate"));
+  											console.log(sessionStorage.getItem("TravelClass"));
+  											console.log(sessionStorage.getItem("departureJourneyDate"));
   											singleTripResponse = 1;
 										//session end 
   											
@@ -146,7 +146,7 @@
 								});
 								setInterval(function(){ 
 									if(departureResponse == 1 && returnResponse == 1){
-										alert("Form submitted");
+										console.log("Form submitted");
 										window.location.href="SelectFlight.html";
 									}	
 								}, 1000);
@@ -164,10 +164,6 @@
 		<div class="logo">
 			<a href="SearchFlight.html"><img src="Logo.png"></a>
 	    </div>
-		<ul>
-			<li><a href="UserLoginPage.html">Log in</a></li>
-            <!-- <li><a href="#">Sign up</li> -->
-		</ul>
 	</div>
 
 
@@ -213,6 +209,8 @@
 												<option value="MUMBAI">Mumbai</option>
 												<option value="DELHI">Delhi</option>
 												<option value="PUNE">Pune</option>
+												<option value="JAIPUR">Jaipur</option>
+												<option value="BANGALORE">Bangalore</option>
 											</select>
 											<span class="select-arrow"></span>
 										</div>
@@ -222,9 +220,11 @@
 											<span class="form-label">Flying to</span>
 											<!--<input class="form-control" type="text" placeholder="City or airport">-->
 											<Select id="destination" class="form-control">
-												<option value="MUMBAI">Mumbai</option>
 												<option value="DELHI">Delhi</option>
+												<option value="MUMBAI">Mumbai</option>
+												<option value="PUNE">Pune</option>
 												<option value="JAIPUR">Jaipur</option>
+												<option value="BANGALORE">Bangalore</option>
 											</select>
 											<span class="select-arrow"></span>
 										</div>

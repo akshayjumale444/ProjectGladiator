@@ -6,32 +6,7 @@
 <link type="text/css" rel="stylesheet" href="bootstrap.min.css" />
 <link type="text/css" rel="stylesheet" href="Airline.css" />
 <link rel="stylesheet" type="text/css" href="ReviewFlight.css"></link>
-<!--
-<style>
-	.selectedFlightDetails{
-		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-		width: 90%;
-		margin-right: 30px;
-  		margin-left: 30px;
-  		padding-top: 10px;
-  		padding-right: 30px;
-  		padding-bottom: 10px;
-  		padding-left: 30px;
-		
-	}
-	.estimatedBill{
-		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-		width: 90%;
-		margin-right: 30px;
-  		margin-left: 30px;
-  		padding-top: 10px;
-  		padding-right: 30px;
-  		padding-bottom: 10px;
-  		padding-left: 30px;
-	}
-	
-</style>
--->
+
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script
 	src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -41,17 +16,17 @@ $(function(){
 	
 	
 	// Session Management
-	if(sessionStorage.tripType == undefined){
-		alert("Session Over!!!!   Redirecting to Home Page....")
+	/* if(sessionStorage.tripType == undefined){
+		//alert("Session Over!!!!   Redirecting to Home Page....")
 		sessionStorage.clear();
 		window.location.href="SearchFlight.html";
-	}
+	} */
 	//End 
 	
 	
 	if(sessionStorage.getItem("tripType")=="oneway"){
 		$("#selectedFlightDetails").append(sessionStorage.getItem("oneWaySelectedFlightId"));
-		alert(sessionStorage.getItem("oneWaySelectedFlightId"));
+		//alert(sessionStorage.getItem("oneWaySelectedFlightId"));
 		
 		var response = JSON.parse(sessionStorage.getItem("oneWayTripFlights"));
 		var oneWaySelectedFlightId = sessionStorage.getItem("oneWaySelectedFlightId");
@@ -190,10 +165,6 @@ $(function(){
 		<div class="logo">
 			<a href="SearchFlight.html"><img src="Logo.png"></a>
 	    </div>
-		<ul>
-			<li><a href="UserLoginPage.html">Log in</a></li>
-            <!--  <li><a href="#">Sign up</li> -->
-		</ul>
 	</div>
 	<div class="container2">
 		<ul class="progressbar">
@@ -206,8 +177,7 @@ $(function(){
 	
 	<!-- END -->
 	<br><br><br><br><hr><br>
-	 <!--<div id="selectedFlightDetails" class="selectedFlightDetails"></div>-->
-	 <!--<div id="estimatedBill" class="estimatedBill"></div>-->
+	 
 	 
 	 <div class="grid-container">
 		<div class="grid1"><div id="selectedFlightDetails" class="selectedFlightDetails"></div></div>
